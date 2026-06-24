@@ -1,0 +1,881 @@
+<style>
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    display:flex;
+    color:#333;
+    overflow:hidden;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:white;
+    border-right:1px solid #ddd;
+    position:fixed;
+    overflow:auto;
+}
+
+.logo{
+    padding:18px 25px;
+    font-size:22px;
+    font-weight:bold;
+    border-bottom:1px solid #eee;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:14px 25px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    color:#555;
+}
+
+.sidebar ul li a{
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    width:100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+    background:#f0f2f5;
+    color:black;
+}
+
+/* Main */
+
+.main{
+    margin-left:250px;
+    width:calc(100% - 250px);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Topbar */
+
+.topbar{
+    height:75px;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    border-bottom:1px solid #ddd;
+}
+
+.title{
+    font-size:20px;
+    font-weight:700;
+}
+
+.search-box{
+    width:350px;
+    height:42px;
+    border:1px solid #ddd;
+    background:white;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 15px;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.icon-box{
+    position:relative;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.badge{
+    position:absolute;
+    top:-6px;
+    right:-6px;
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    background:#111827;
+    color:white;
+    font-size:11px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.profile{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.profile img{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+}
+
+.content{
+    padding:20px;
+    flex:1;
+    overflow:hidden;
+}
+
+/* Header */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.header h1{
+    font-size:30px;
+}
+
+.add-btn{
+    padding:10px 20px;
+    border:none;
+    background:#111827;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* Filter */
+
+.filter-box{
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    margin-bottom:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.search-project{
+    width:260px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.search-project input{
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+.filter-box select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    outline:none;
+}
+
+.filter-btn{
+    padding:12px 20px;
+    border:none;
+    background:#111827;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* Table */
+
+.table-box{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#fafafa;
+    padding:14px;
+    text-align:left;
+    font-size:14px;
+}
+
+td{
+    padding:12px 14px;
+    border-top:1px solid #eee;
+    font-size:13px;
+}
+
+.project-info,
+.manager{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.project-info img{
+    width:32px;
+    height:32px;
+}
+
+.manager img{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+}
+
+.status{
+    padding:6px 14px;
+    border-radius:18px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.ongoing{
+    background:#dbeafe;
+    color:#2563eb;
+}
+
+.completed{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.planning{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+.action{
+    display:flex;
+    gap:15px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+/* Footer */
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:12px;
+}
+
+.entries{
+    color:#666;
+    font-size:13px;
+}
+
+.pagination{
+    display:flex;
+    gap:8px;
+}
+
+.page{
+    width:34px;
+    height:34px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:8px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.page.active{
+    background:#111827;
+    color:white;
+}
+
+.page:hover,
+.filter-btn:hover,
+.add-btn:hover{
+    opacity:.9;
+}
+
+tr:hover{
+    background:#fafafa;
+}
+</style>
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+ <div class="logo">EMS ADMIN</div>
+  <ul>
+ <li ><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li ><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li ><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li ><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li ><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li class="active"><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li ><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li ><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li ><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li ><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li ><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+ </div>
+
+
+<!-- Main -->
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<div class="title">
+
+EMPLOYEE MANAGEMENT SYSTEM
+
+</div>
+
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input type="text"
+placeholder="Search anything...">
+
+</div>
+
+
+<div class="top-right">
+
+<div class="icon-box">
+
+<i class="fa-regular fa-bell"></i>
+
+<span class="badge">3</span>
+
+</div>
+
+<div class="icon-box">
+
+<i class="fa-regular fa-envelope"></i>
+
+<span class="badge">5</span>
+
+</div>
+
+<div class="profile">
+
+<img src="httpsimg=5">
+
+<div>
+
+<h4>John Doe</h4>
+
+<small>Manager</small>
+
+</div>
+
+<i class="fa-solid fa-angle-down"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Content -->
+
+<div class="content">
+
+
+<!-- Header -->
+
+<div class="header">
+
+<h1>
+
+Project Management
+
+</h1>
+
+<button class="add-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Project
+
+</button>
+
+</div>
+
+
+
+<!-- Filters -->
+
+<div class="filter-box">
+
+<div class="search-project">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input type="text"
+placeholder="Search projects...">
+
+</div>
+
+
+<select>
+
+<option>All Status</option>
+
+<option>Planning</option>
+
+<option>Ongoing</option>
+
+<option>Completed</option>
+
+</select>
+
+
+<button class="filter-btn">
+
+<i class="fa-solid fa-filter"></i>
+
+Filter
+
+</button>
+
+</div>
+<!-- Project Table -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Project Name</th>
+<th>Manager</th>
+<th>Team Size</th>
+<th>Status</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+<tr>
+
+<td>
+
+<div class="project-info">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png">
+
+<span>Website EMS</span>
+
+</div>
+
+</td>
+
+<td>
+
+<div class="manager">
+
+<img src="https://i.pravatar.cc/50?img=11">
+
+<span>David Brown</span>
+
+</div>
+
+</td>
+
+<td>6</td>
+
+<td>
+
+<span class="status ongoing">
+
+Ongoing
+
+</span>
+
+</td>
+
+<td>01/04/2025</td>
+
+<td>30/06/2025</td>
+
+<td>
+
+<div class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="project-info">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png">
+
+<span>HR Portal</span>
+
+</div>
+
+</td>
+
+<td>
+
+<div class="manager">
+
+<img src="https://i.pravatar.cc/50?img=12">
+
+<span>Sarah Johnson</span>
+
+</div>
+
+</td>
+
+<td>4</td>
+
+<td>
+
+<span class="status completed">
+
+Completed
+
+</span>
+
+</td>
+
+<td>15/01/2025</td>
+
+<td>15/04/2025</td>
+
+<td>
+
+<div class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="project-info">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png">
+
+<span>Mobile App</span>
+
+</div>
+
+</td>
+
+<td>
+
+<div class="manager">
+
+<img src="https://i.pravatar.cc/50?img=13">
+
+<span>Mike Smith</span>
+
+</div>
+
+</td>
+
+<td>5</td>
+
+<td>
+
+<span class="status ongoing">
+
+Ongoing
+
+</span>
+
+</td>
+
+<td>01/05/2025</td>
+
+<td>31/08/2025</td>
+
+<td>
+
+<div class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="project-info">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png">
+
+<span>Payroll System</span>
+
+</div>
+
+</td>
+
+<td>
+
+<div class="manager">
+
+<img src="https://i.pravatar.cc/50?img=14">
+
+<span>Emily Davis</span>
+
+</div>
+
+</td>
+
+<td>3</td>
+
+<td>
+
+<span class="status planning">
+
+Planning
+
+</span>
+
+</td>
+
+<td>10/05/2025</td>
+
+<td>-</td>
+
+<td>
+
+<div class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</div>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="project-info">
+
+<img src="https://cdn-icons-png.flaticon.com/512/3767/3767084.png">
+
+<span>Employee Portal</span>
+
+</div>
+
+</td>
+
+<td>
+
+<div class="manager">
+
+<img src="https://i.pravatar.cc/50?img=15">
+
+<span>James Wilson</span>
+
+</div>
+
+</td>
+
+<td>7</td>
+
+<td>
+
+<span class="status completed">
+
+Completed
+
+</span>
+
+</td>
+
+<td>01/02/2025</td>
+
+<td>28/03/2025</td>
+
+<td>
+
+<div class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- Footer -->
+
+<div class="footer">
+
+<div class="entries">
+
+Showing 1 to 5 of 12 entries
+
+</div>
+
+
+<div class="pagination">
+
+<div class="page">
+
+<i class="fa-solid fa-angle-left"></i>
+
+</div>
+
+<div class="page active">
+
+1
+
+</div>
+
+<div class="page">
+
+2
+
+</div>
+
+<div class="page">
+
+3
+
+</div>
+
+<div class="page">
+
+...
+
+</div>
+
+<div class="page">
+
+12
+
+</div>
+
+<div class="page">
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

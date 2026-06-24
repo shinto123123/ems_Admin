@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Leave Management - Admin</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+ 
+ *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7fa;
+display:flex;
+height:100vh;
+overflow:hidden;
+color:#333;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:250px;
+height:100vh;
+background:white;
+border-right:1px solid #ddd;
+position:fixed;
+overflow:auto;
+}
+
+.logo{
+padding:18px 25px;
+font-size:22px;
+font-weight:bold;
+border-bottom:1px solid #eee;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar ul li{
+padding:14px 25px;
+display:flex;
+gap:15px;
+align-items:center;
+cursor:pointer;
+transition:.3s;
+font-size:15px;
+color:#555;
+}
+
+.sidebar ul li a{
+text-decoration:none;
+color:inherit;
+display:flex;
+gap:15px;
+align-items:center;
+width:100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+background:#f0f2f5;
+color:black;
+}
+
+/* Main */
+
+.main{
+margin-left:250px;
+width:calc(100% - 250px);
+height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* Topbar */
+
+.topbar{
+height:65px;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 25px;
+border-bottom:1px solid #e5e7eb;
+}
+
+.search{
+background:#f5f7fa;
+padding:10px 15px;
+border-radius:10px;
+width:320px;
+}
+
+.search input{
+border:none;
+background:none;
+outline:none;
+width:90%;
+}
+
+.right{
+display:flex;
+gap:20px;
+align-items:center;
+font-size:18px;
+}
+
+.profile{
+display:flex;
+gap:12px;
+align-items:center;
+}
+
+.profile img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+/* Content */
+
+.content{
+flex:1;
+padding:15px 20px;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+/* Breadcrumb */
+
+.breadcrumb{
+font-size:13px;
+margin-bottom:5px;
+color:#777;
+}
+
+/* Header */
+
+.page-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.page-header h1{
+font-size:28px;
+margin-bottom:5px;
+}
+
+.page-header p{
+font-size:13px;
+color:#666;
+}
+
+.header-buttons{
+display:flex;
+gap:10px;
+}
+
+/* Buttons */
+
+.btn{
+padding:10px 16px;
+border-radius:10px;
+border:1px solid #ddd;
+background:white;
+cursor:pointer;
+font-size:13px;
+}
+
+.btn.add{
+background:#111827;
+color:white;
+}
+
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:12px;
+}
+
+.card{
+background:white;
+padding:14px;
+border-radius:15px;
+display:flex;
+gap:12px;
+align-items:center;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.icon{
+width:45px;
+height:45px;
+font-size:18px;
+border-radius:50%;
+background:#f4f4f5;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.card h2{
+font-size:24px;
+margin:3px 0;
+}
+
+.card h4{
+font-size:14px;
+}
+
+.card p{
+font-size:12px;
+color:#888;
+}
+
+/* Filter */
+
+.filter-box{
+background:white;
+padding:15px;
+display:flex;
+gap:10px;
+border-radius:15px;
+flex-wrap:wrap;
+}
+
+.filter-box input,
+.filter-box select{
+padding:10px;
+border:1px solid #ddd;
+border-radius:10px;
+min-width:170px;
+font-size:13px;
+}
+
+/* Tabs */
+
+.tabs{
+display:flex;
+gap:25px;
+padding-bottom:10px;
+border-bottom:1px solid #eee;
+}
+
+.tab{
+font-size:14px;
+padding-bottom:10px;
+cursor:pointer;
+}
+
+.tab.active{
+font-weight:600;
+border-bottom:3px solid black;
+}
+
+/* Table */
+
+.table-box{
+flex:1;
+background:white;
+border-radius:15px;
+overflow:auto;
+box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+padding:12px;
+font-size:13px;
+background:#fafafa;
+text-align:left;
+}
+
+td{
+padding:10px 12px;
+font-size:13px;
+border-top:1px solid #eee;
+}
+
+.employee{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.employee img{
+width:35px;
+height:35px;
+border-radius:50%;
+}
+
+.employee h4{
+font-size:13px;
+}
+
+.employee p{
+font-size:11px;
+color:#888;
+}
+
+.status{
+padding:6px 12px;
+border-radius:18px;
+font-size:12px;
+font-weight:600;
+}
+
+/* Footer */
+
+.footer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:10px;
+font-size:13px;
+}
+
+.pages{
+display:flex;
+gap:8px;
+}
+
+.page{
+width:32px;
+height:32px;
+border:1px solid #ddd;
+border-radius:8px;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+background:white;
+font-size:13px;
+}
+
+.page.active{
+background:#111827;
+color:white;
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        EMS ADMIN
+    </div>
+
+<ul>
+ <li ><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li ><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li ><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li class="active"><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li ><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li ><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+</div>
+
+
+
+<!-- Main -->
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<div class="search">
+<i class="fa fa-search"></i>
+<input type="text" placeholder="Search employees, departments...">
+</div>
+
+<div class="right">
+
+<i class="fa-regular fa-bell"></i>
+
+<i class="fa-regular fa-envelope"></i>
+
+<div class="profile">
+
+<img src="htimg=5">
+
+<div>
+<h4>Admin User</h4>
+<small>Administrator</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="content">
+
+<div class="breadcrumb">
+
+Dashboard
+<i class="fa-solid fa-angle-right"></i>
+
+Leave Management
+
+</div>
+
+
+<div class="page-header">
+
+<div>
+
+<h1>Leave Management</h1>
+
+<p>
+Manage and review leave requests submitted by employees.
+</p>
+
+</div>
+
+<div class="header-buttons">
+
+<button class="btn">
+
+<i class="fa-solid fa-download"></i>
+
+Export
+
+</button>
+
+<button class="btn">
+
+<i class="fa-solid fa-file"></i>
+
+Leave Reports
+
+</button>
+
+<button class="btn add">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Leave
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-regular fa-calendar"></i>
+</div>
+
+<div>
+
+<h4>Total Requests</h4>
+
+<h2>42</h2>
+
+<p>This Month</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+
+<i class="fa-solid fa-check"></i>
+
+</div>
+
+<div>
+
+<h4>Approved</h4>
+
+<h2>18</h2>
+
+<p>42.86% of total</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+
+<i class="fa-regular fa-clock"></i>
+
+</div>
+
+<div>
+
+<h4>Pending</h4>
+
+<h2>14</h2>
+
+<p>33.33% of total</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+
+<i class="fa-solid fa-xmark"></i>
+
+</div>
+
+<div>
+
+<h4>Rejected</h4>
+
+<h2>10</h2>
+
+<p>23.81% of total</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+
+<i class="fa-regular fa-calendar"></i>
+
+</div>
+
+<div>
+
+<h4>Today's Requests</h4>
+
+<h2>3</h2>
+
+<p>View today's requests</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Filters -->
+
+<div class="filter-box">
+
+<input type="text"
+placeholder="Search employee name or ID">
+
+<input type="text"
+value="May 01, 2025 - May 31, 2025">
+
+<select>
+<option>All Departments</option>
+</select>
+
+<select>
+<option>All Leave Types</option>
+</select>
+
+<select>
+<option>All Status</option>
+</select>
+
+<button class="btn">
+Filter
+</button>
+
+<button class="btn">
+Reset
+</button>
+
+</div>
+
+
+
+<!-- Tabs -->
+
+<div class="tabs">
+
+<div class="tab active">
+All Requests
+</div>
+
+<div class="tab">
+Pending
+</div>
+
+<div class="tab">
+Approved
+</div>
+
+<div class="tab">
+Rejected
+</div>
+
+<div class="tab">
+Cancelled
+</div>
+
+</div>
+<!-- Table -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+<input type="checkbox">
+</th>
+
+<th>Request ID</th>
+
+<th>Employee</th>
+
+<th>Department</th>
+
+<th>Leave Type</th>
+
+<th>Dates</th>
+
+<th>Days</th>
+
+<th>Reason</th>
+
+<th>Applied On</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-042</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=1">
+
+<div>
+
+<h4>John Doe</h4>
+
+<p>EMP001</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>HR</td>
+
+<td>Paid Leave</td>
+
+<td>May 12 - May 14, 2025</td>
+
+<td>3</td>
+
+<td>Family function</td>
+
+<td>May 08, 2025</td>
+
+<td>
+<span class="status approved">
+Approved
+</span>
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-041</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=2">
+
+<div>
+
+<h4>Mike Smith</h4>
+
+<p>EMP002</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>IT</td>
+
+<td>Sick Leave</td>
+
+<td>May 15 - May 16, 2025</td>
+
+<td>2</td>
+
+<td>Fever and cold</td>
+
+<td>May 09, 2025</td>
+
+<td>
+<span class="status pending">
+Pending
+</span>
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-040</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=3">
+
+<div>
+
+<h4>Sara Johnson</h4>
+
+<p>EMP003</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Finance</td>
+
+<td>Work From Home</td>
+
+<td>May 17, 2025</td>
+
+<td>1</td>
+
+<td>Doctor appointment</td>
+
+<td>May 10, 2025</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-039</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=4">
+
+<div>
+
+<h4>David Brown</h4>
+
+<p>EMP004</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Marketing</td>
+
+<td>Casual Leave</td>
+
+<td>May 20 - May 21, 2025</td>
+
+<td>2</td>
+
+<td>Personal Work</td>
+
+<td>May 12, 2025</td>
+
+<td>
+
+<span class="status rejected">
+
+Rejected
+
+</span>
+
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-038</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=5">
+
+<div>
+
+<h4>Emily Davis</h4>
+
+<p>EMP005</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>IT</td>
+
+<td>Paid Leave</td>
+
+<td>May 22 - May 24, 2025</td>
+
+<td>3</td>
+
+<td>Vacation</td>
+
+<td>May 13, 2025</td>
+
+<td>
+
+<span class="status pending">
+
+Pending
+
+</span>
+
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-037</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=6">
+
+<div>
+
+<h4>Robert Lee</h4>
+
+<p>EMP006</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Operations</td>
+
+<td>Sick Leave</td>
+
+<td>May 07, 2025</td>
+
+<td>1</td>
+
+<td>Migraine</td>
+
+<td>May 06, 2025</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td><input type="checkbox"></td>
+
+<td>LV-2025-036</td>
+
+<td>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/45?img=7">
+
+<div>
+
+<h4>Laura Martin</h4>
+
+<p>EMP007</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Design</td>
+
+<td>Maternity Leave</td>
+
+<td>Jun 01 - Aug 30, 2025</td>
+
+<td>91</td>
+
+<td>Maternity</td>
+
+<td>May 05, 2025</td>
+
+<td>
+
+<span class="status approved">
+
+Approved
+
+</span>
+
+</td>
+
+<td class="action">
+
+<i class="fa-regular fa-eye"></i>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- Footer -->
+
+<div class="footer">
+
+<div>
+
+Showing 1 to 7 of 42 entries
+
+</div>
+
+<div class="pages">
+
+<div class="page">
+<i class="fa-solid fa-angle-left"></i>
+</div>
+
+<div class="page active">
+1
+</div>
+
+<div class="page">
+2
+</div>
+
+<div class="page">
+3
+</div>
+
+<div class="page">
+4
+</div>
+
+<div class="page">
+5
+</div>
+
+<div class="page">
+...
+</div>
+
+<div class="page">
+6
+</div>
+
+<div class="page">
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>
+</html>

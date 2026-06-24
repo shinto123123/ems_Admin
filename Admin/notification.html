@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Notifications</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+ /* CSS Part 3 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  display: flex;
+  color: #222;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:white;
+    border-right:1px solid #ddd;
+    position:fixed;
+    overflow:auto;
+}
+
+.logo{
+    padding:18px 25px;
+    font-size:22px;
+    font-weight:bold;
+    border-bottom:1px solid #eee;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:14px 25px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    color:#555;
+}
+
+.sidebar ul li a{
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    width:100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+    background:#f0f2f5;
+    color:black;
+}
+
+/* Main */
+
+.main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Topbar */
+
+.topbar {
+  height: 64px;
+  min-height: 64px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.search-box {
+  width: 340px;
+  height: 42px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  background: white;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.icon-box {
+  position: relative;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+/* Content */
+
+.content {
+  padding: 18px 28px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.header h1 {
+  font-size: 26px;
+}
+
+.read-btn {
+  padding: 9px 18px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.read-btn:hover {
+  background: black;
+  color: white;
+  transition: .3s;
+}
+
+/* Tabs */
+
+.tabs {
+  display: flex;
+  gap: 40px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 14px;
+}
+
+.tab {
+  padding-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #666;
+}
+
+.tab.active {
+  border-bottom: 3px solid black;
+  font-weight: 600;
+  color: black;
+}
+
+/* Notification Box */
+
+.notification-box {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 22px;
+  flex: 1;
+  border-bottom: 1px solid #eee;
+  transition: .3s;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item:hover {
+  background: #fafafa;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  background: #777;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.notify-icon {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+  background: white;
+  flex-shrink: 0;
+}
+
+.notify-content h3 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.notify-content p {
+  color: #666;
+  font-size: 13px;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #555;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.right-section i {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 1200px) {
+  .notification-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 22px;
+  }
+
+  .right-section {
+    margin-left: 65px;
+  }
+}
+
+@media (max-width: 992px) {
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .tabs {
+    overflow: auto;
+  }
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">
+EMS ADMIN
+</div>
+
+<ul>
+ <li ><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li ><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li ><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li ><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li class="active"><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+</div>
+
+
+<!-- Main -->
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<div class="title">
+
+EMPLOYEE MANAGEMENT SYSTEM
+
+</div>
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input type="text"
+placeholder="Search anything...">
+
+</div>
+
+
+<div class="top-right">
+
+<div class="icon-box">
+
+<i class="fa-regular fa-bell"></i>
+
+<span class="badge">3</span>
+
+</div>
+
+<div class="icon-box">
+
+<i class="fa-regular fa-envelope"></i>
+
+<span class="badge">5</span>
+
+</div>
+
+<div class="profile">
+
+<img src="htvatar.cc/50?img=12">
+
+<div>
+
+<h4>John Doe</h4>
+
+<small>Manager</small>
+
+</div>
+
+<i class="fa-solid fa-angle-down"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Content -->
+
+<div class="content">
+
+<div class="header">
+
+<h1>Notifications</h1>
+
+<button class="read-btn">
+
+<i class="fa-regular fa-circle-check"></i>
+
+Mark All as Read
+
+</button>
+
+</div>
+
+
+<!-- Tabs -->
+
+<div class="tabs">
+
+<div class="tab active">
+
+All (4)
+
+</div>
+
+<div class="tab">
+
+Unread (4)
+
+</div>
+
+<div class="tab">
+
+Read (0)
+
+</div>
+
+</div>
+
+
+<!-- Notification Box -->
+
+<div class="notification-box">
+    <!-- Notification 1 -->
+
+<div class="notification-item">
+
+<div class="left-section">
+
+<div class="dot"></div>
+
+<div class="notify-icon">
+
+<i class="fa-regular fa-calendar-check"></i>
+
+</div>
+
+<div class="notify-content">
+
+<h3>Leave Request Approved</h3>
+
+<p>
+Your leave request from 15 May 2025 to 17 May 2025 has been approved.
+</p>
+
+</div>
+
+</div>
+
+<div class="right-section">
+
+<span>10 minutes ago</span>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+
+
+<!-- Notification 2 -->
+
+<div class="notification-item">
+
+<div class="left-section">
+
+<div class="dot"></div>
+
+<div class="notify-icon">
+
+<i class="fa-regular fa-star"></i>
+
+</div>
+
+<div class="notify-content">
+
+<h3>Performance Review Scheduled</h3>
+
+<p>
+Your performance review is scheduled on 25 May 2025 at 11:00 AM.
+</p>
+
+</div>
+
+</div>
+
+<div class="right-section">
+
+<span>1 hour ago</span>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+
+
+<!-- Notification 3 -->
+
+<div class="notification-item">
+
+<div class="left-section">
+
+<div class="dot"></div>
+
+<div class="notify-icon">
+
+<i class="fa-regular fa-file-lines"></i>
+
+</div>
+
+<div class="notify-content">
+
+<h3>Payroll Processed</h3>
+
+<p>
+Your salary for May 2025 has been processed.
+</p>
+
+</div>
+
+</div>
+
+<div class="right-section">
+
+<span>3 hours ago</span>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+
+
+<!-- Notification 4 -->
+
+<div class="notification-item">
+
+<div class="left-section">
+
+<div class="dot"></div>
+
+<div class="notify-icon">
+
+<i class="fa-regular fa-folder"></i>
+
+</div>
+
+<div class="notify-content">
+
+<h3>New Project Assigned</h3>
+
+<p>
+You have been assigned to the project "HR Portal".
+</p>
+
+</div>
+
+</div>
+
+<div class="right-section">
+
+<span>1 day ago</span>
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

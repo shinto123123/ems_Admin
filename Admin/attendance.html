@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Management</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+ .sidebar ul li a{
+ text-decoration:none;
+ color:inherit;
+ display:flex;
+ gap:15px;
+ align-items:center;
+ width:100%;
+ }
+ </style>
+ <style>
+ *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+ body{background:#f5f7fa;display:flex}
+ .sidebar{width:250px;height:100vh;background:white;border-right:1px solid #ddd;position:fixed;overflow:auto}
+ .logo{padding:18px 25px;font-size:22px;font-weight:bold;border-bottom:1px solid #eee}
+ .sidebar ul{list-style:none}
+ .sidebar ul li{padding:14px 25px;display:flex;gap:15px;align-items:center;cursor:pointer;transition:.3s;font-size:15px;color:#555}
+ .sidebar ul li:hover,.sidebar ul li.active{background:#f0f2f5;color:black}
+ .main{margin-left:250px;width:calc(100% - 250px)}
+ .topbar{height:80px;background:white;display:flex;justify-content:space-between;align-items:center;padding:0 30px;border-bottom:1px solid #ddd}
+ .search{background:#f5f7fa;padding:12px 20px;border-radius:10px;width:400px}
+ .search input{border:none;outline:none;background:none;width:90%}
+ .right{display:flex;gap:25px;align-items:center}
+ .profile{display:flex;align-items:center;gap:15px}
+ .profile img{width:45px;height:45px;border-radius:50%}
+ .content{padding:30px}
+ .header{display:flex;justify-content:space-between;margin-bottom:25px}
+ .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+ .card{background:white;padding:25px;border-radius:15px}
+ .table-box{background:white;border-radius:15px;overflow:hidden;margin-top:25px}
+ table{width:100%;border-collapse:collapse}
+ th,td{padding:18px;border-top:1px solid #eee;text-align:left}
+ .status{padding:7px 15px;border-radius:20px;background:#dcfce7;color:#15803d}
+ </style>
+</head>
+<body>
+<div class="sidebar">
+ <div class="logo">EMS ADMIN</div>
+<ul>
+ <li ><a href="Dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li class="active"><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+ </div>
+<div class="main">
+<div class="topbar">
+<div class="search"><i class="fa fa-search"></i><input placeholder="Search anything..."></div>
+<div class="right"><i class="fa-regular fa-bell"></i><div class="profile"><img src="5"><div><h4>Admin User</h4><small>Administrator</small></div></div></div>
+</div>
+<div class="content">
+<div class="header"><div><h1>Attendance Management</h1><p>View and monitor attendance marked by managers</p></div></div>
+<div class="cards">
+<div class="card"><h3>Total Employees</h3><h1>256</h1></div>
+<div class="card"><h3>Present</h3><h1>198</h1></div>
+<div class="card"><h3>Absent</h3><h1>42</h1></div>
+<div class="card"><h3>On Leave</h3><h1>16</h1></div>
+<div class="card"><h3>Late</h3><h1>22</h1></div>
+</div>
+<div class="table-box">
+<table>
+<tr><th>ID</th><th>Name</th><th>Department</th><th>Status</th></tr>
+<tr><td>EMP001</td><td>John Doe</td><td>IT</td><td><span class="status">Present</span></td></tr>
+<tr><td>EMP002</td><td>Sarah Johnson</td><td>HR</td><td><span class="status">Present</span></td></tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

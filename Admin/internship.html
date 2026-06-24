@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+ <title>Internship Management</title>
+ 
+ <link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+ 
+ <style>
+ *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7fa;
+display:flex;
+color:#222;
+height:100vh;
+overflow:hidden;
+}
+
+/* Sidebar */
+
+.sidebar{
+    width:250px;
+    height:100vh;
+    background:white;
+    border-right:1px solid #ddd;
+    position:fixed;
+    overflow:auto;
+}
+
+.logo{
+    padding:18px 25px;
+    font-size:22px;
+    font-weight:bold;
+    border-bottom:1px solid #eee;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    padding:14px 25px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+    color:#555;
+}
+
+.sidebar ul li a{
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    gap:15px;
+    align-items:center;
+    width:100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+    background:#f0f2f5;
+    color:black;
+}
+
+/* Main */
+
+.main{
+margin-left:250px;
+width:calc(100% - 250px);
+height:100vh;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+}
+
+/* Topbar */
+
+.topbar{
+height:70px;
+background:#fff;
+border-bottom:1px solid #ddd;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 25px;
+flex-shrink:0;
+}
+
+.title{
+font-size:22px;
+font-weight:700;
+}
+
+.search-box{
+width:340px;
+height:42px;
+border:1px solid #ddd;
+border-radius:10px;
+display:flex;
+align-items:center;
+padding:0 15px;
+gap:12px;
+}
+
+.search-box input{
+border:none;
+outline:none;
+width:100%;
+}
+
+.top-right{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+.icon-box{
+position:relative;
+font-size:18px;
+}
+
+.badge{
+position:absolute;
+top:-7px;
+right:-7px;
+background:black;
+color:white;
+width:16px;
+height:16px;
+border-radius:50%;
+font-size:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.profile img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+/* Content */
+
+.content{
+padding:18px 25px;
+flex:1;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h1{
+font-size:28px;
+}
+
+.add-btn{
+padding:10px 18px;
+border:none;
+background:black;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* Cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.card{
+background:white;
+padding:15px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:15px;
+box-shadow:0 2px 6px rgba(0,0,0,.05);
+}
+
+.icon{
+width:48px;
+height:48px;
+background:#f3f4f6;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+}
+
+.card h3{
+font-size:28px;
+margin:3px 0;
+}
+
+.card small{
+font-size:12px;
+color:#666;
+}
+
+/* Filters */
+
+.filter-box{
+display:flex;
+gap:12px;
+}
+
+.filter-box input,
+.filter-box select{
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+outline:none;
+min-width:160px;
+font-size:13px;
+}
+
+.filter-btn{
+padding:10px 18px;
+border:none;
+background:black;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* Table */
+
+.table-box{
+background:white;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 2px 6px rgba(0,0,0,.05);
+flex:1;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+th{
+background:#fafafa;
+padding:12px;
+text-align:left;
+}
+
+td{
+padding:10px 12px;
+border-top:1px solid #eee;
+}
+
+.intern{
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.intern img{
+width:40px;
+height:40px;
+border-radius:50%;
+}
+
+.intern h4{
+font-size:14px;
+}
+
+.intern p{
+font-size:12px;
+color:#666;
+margin-top:3px;
+}
+
+.active-status,
+.completed-status,
+.upcoming-status{
+padding:6px 12px;
+border-radius:6px;
+font-size:12px;
+font-weight:600;
+}
+
+.active-status{
+background:#dcfce7;
+color:#15803d;
+}
+
+.completed-status{
+background:#dbeafe;
+color:#2563eb;
+}
+
+.upcoming-status{
+background:#fef3c7;
+color:#b45309;
+}
+
+/* Footer */
+
+.footer{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:10px;
+}
+
+.entries{
+font-size:13px;
+color:#666;
+}
+
+.pagination{
+display:flex;
+gap:8px;
+}
+
+.page{
+width:34px;
+height:34px;
+background:white;
+border:1px solid #ddd;
+border-radius:7px;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+font-size:13px;
+}
+
+.page.active{
+background:black;
+color:white;
+}
+
+.page:hover{
+background:black;
+color:white;
+}
+
+tr:hover{
+background:#fafafa;
+}
+
+</style>
+
+</head>
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">
+EMS ADMIN
+</div>
+
+<ul>
+ <li ><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li ><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li ><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li class="active"><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li ><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+
+</div>
+
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<div class="title">
+
+EMPLOYEE MANAGEMENT SYSTEM
+
+</div>
+
+<div class="search-box">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+<input type="text"
+placeholder="Search anything...">
+
+</div>
+
+
+<div class="top-right">
+
+<div class="icon-box">
+<i class="fa-regular fa-bell"></i>
+<span class="badge">3</span>
+</div>
+
+<div class="icon-box">
+<i class="fa-regular fa-envelope"></i>
+<span class="badge">5</span>
+</div>
+
+<div class="profile">
+
+<img src="http8">
+
+<div>
+
+<h4>Admin User</h4>
+
+<small>Administrator</small>
+
+</div>
+
+<i class="fa-solid fa-angle-down"></i>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Content -->
+
+<div class="content">
+
+<div class="header">
+
+<h1>
+
+Internship Management
+
+</h1>
+
+<button class="add-btn">
+
+<i class="fa-solid fa-plus"></i>
+
+Add Intern
+
+</button>
+
+</div>
+
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-users"></i>
+</div>
+
+<div>
+
+<h3>28</h3>
+
+<p>Total Interns</p>
+
+<small>All Time</small>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-user-check"></i>
+</div>
+
+<div>
+
+<h3>18</h3>
+
+<p>Active Interns</p>
+
+<small>Currently Active</small>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-solid fa-graduation-cap"></i>
+</div>
+
+<div>
+
+<h3>9</h3>
+
+<p>Completed Internships</p>
+
+<small>This Year</small>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="icon">
+<i class="fa-regular fa-calendar-check"></i>
+</div>
+
+<div>
+
+<h3>5</h3>
+
+<p>Upcoming Completions</p>
+
+<small>Next 30 Days</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Filters -->
+
+<div class="filter-box">
+
+<input type="text"
+placeholder="Search interns...">
+
+<select>
+
+<option>All Departments</option>
+
+</select>
+
+<select>
+
+<option>All Status</option>
+
+</select>
+
+<input type="text"
+value="01/05/2025 - 31/05/2025">
+
+<button class="filter-btn">
+
+<i class="fa-solid fa-filter"></i>
+
+Filter
+
+</button>
+
+</div>
+<!-- Table -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Intern Name</th>
+<th>Department</th>
+<th>University / College</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Mentor</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+
+<tr>
+
+<td>
+
+<div class="intern">
+
+<img src="https://i.pravatar.cc/50?img=1">
+
+<div>
+
+<h4>Aarav Sharma</h4>
+
+<p>INTR001</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>IT</td>
+
+<td>ABC University</td>
+
+<td>01/04/2025</td>
+
+<td>30/06/2025</td>
+
+<td>David Brown</td>
+
+<td>
+
+<span class="active-status">
+
+Active
+
+</span>
+
+</td>
+
+<td>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="intern">
+
+<img src="https://i.pravatar.cc/50?img=2">
+
+<div>
+
+<h4>Priya Patel</h4>
+
+<p>INTR002</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>HR</td>
+
+<td>XYZ College</td>
+
+<td>15/03/2025</td>
+
+<td>15/06/2025</td>
+
+<td>Sarah Johnson</td>
+
+<td>
+
+<span class="active-status">
+
+Active
+
+</span>
+
+</td>
+
+<td>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="intern">
+
+<img src="https://i.pravatar.cc/50?img=3">
+
+<div>
+
+<h4>Rohan Mehta</h4>
+
+<p>INTR003</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Marketing</td>
+
+<td>LMN University</td>
+
+<td>01/02/2025</td>
+
+<td>30/04/2025</td>
+
+<td>Mike Smith</td>
+
+<td>
+
+<span class="completed-status">
+
+Completed
+
+</span>
+
+</td>
+
+<td>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="intern">
+
+<img src="https://i.pravatar.cc/50?img=4">
+
+<div>
+
+<h4>Sneha Iyer</h4>
+
+<p>INTR004</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>Finance</td>
+
+<td>PQR Institute</td>
+
+<td>10/04/2025</td>
+
+<td>10/07/2025</td>
+
+<td>Emily Davis</td>
+
+<td>
+
+<span class="active-status">
+
+Active
+
+</span>
+
+</td>
+
+<td>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+<div class="intern">
+
+<img src="https://i.pravatar.cc/50?img=5">
+
+<div>
+
+<h4>Vikram Singh</h4>
+
+<p>INTR005</p>
+
+</div>
+
+</div>
+
+</td>
+
+<td>IT</td>
+
+<td>ABC University</td>
+
+<td>05/05/2025</td>
+
+<td>05/08/2025</td>
+
+<td>David Brown</td>
+
+<td>
+
+<span class="upcoming-status">
+
+Upcoming
+
+</span>
+
+</td>
+
+<td>
+
+<i class="fa-solid fa-ellipsis-vertical"></i>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- Footer -->
+
+<div class="footer">
+
+<div class="entries">
+
+Showing 1 to 5 of 28 entries
+
+</div>
+
+
+<div class="pagination">
+
+<div class="page">
+
+<i class="fa-solid fa-angle-left"></i>
+
+</div>
+
+<div class="page active">
+
+1
+
+</div>
+
+<div class="page">
+
+2
+
+</div>
+
+<div class="page">
+
+3
+
+</div>
+
+<div class="page">
+
+...
+
+</div>
+
+<div class="page">
+
+6
+
+</div>
+
+<div class="page">
+
+<i class="fa-solid fa-angle-right"></i>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

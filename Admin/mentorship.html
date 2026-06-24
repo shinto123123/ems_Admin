@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  display: flex;
+  color: #222;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: white;
+  border-right: 1px solid #ddd;
+  position: fixed;
+  overflow: auto;
+}
+
+.logo {
+  padding: 18px 25px;
+  font-size: 22px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  padding: 14px 25px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  cursor: pointer;
+  transition: .3s;
+  font-size: 15px;
+  color: #555;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background: #f0f2f5;
+  color: black;
+}
+
+/* Main */
+.main {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Topbar */
+.topbar {
+  height: 58px;
+  min-height: 58px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.search-box {
+  width: 320px;
+  height: 38px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  background: white;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.icon-box {
+  position: relative;
+  font-size: 18px;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #111827;
+  color: white;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+}
+
+.profile {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.profile img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.profile h4 {
+  font-size: 13px;
+}
+
+.profile small {
+  font-size: 11px;
+}
+
+/* Content */
+.content {
+  padding: 14px 22px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-size: 22px;
+}
+
+.add-btn {
+  padding: 8px 18px;
+  border: none;
+  background: #111827;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.card p {
+  font-size: 12px;
+  color: #777;
+}
+
+.card h2 {
+  font-size: 22px;
+  margin: 2px 0;
+}
+
+.card small {
+  font-size: 11px;
+  color: #aaa;
+}
+
+/* Filters */
+.filters {
+  background: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #e5e7eb;
+  align-items: center;
+}
+
+.filters input,
+.filters select {
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  font-size: 13px;
+}
+
+.filter-btn {
+  height: 36px;
+  padding: 0 18px;
+  border: none;
+  background: #111827;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* Table */
+.table-box {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background: #fafafa;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+td {
+  padding: 8px 14px;
+  border-top: 1px solid #eee;
+  font-size: 13px;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.person img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.person h4 {
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.person p {
+  font-size: 11px;
+  color: #666;
+}
+
+/* Status */
+.status {
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.active-status {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.completed-status {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.upcoming-status {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+.pagination {
+  display: flex;
+  gap: 6px;
+}
+
+.page {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: #fff;
+  font-size: 13px;
+}
+
+.page.active {
+  background: #111827;
+  color: white;
+}
+
+/* Insights */
+.insights {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.insight-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.insight-icon {
+  width: 46px;
+  height: 46px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #444;
+  flex-shrink: 0;
+}
+
+.insight-card h4 {
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.insight-card h2 {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.insight-card p {
+  color: #888;
+  font-size: 11px;
+}
+
+/* Responsive */
+@media(max-width:1200px) {
+  .cards,
+  .insights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .filters {
+    flex-wrap: wrap;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+@media(max-width:768px) {
+  .cards,
+  .insights {
+    grid-template-columns: 1fr;
+  }
+}
+    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentorship Management</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="mentorship.css">
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+
+<div class="logo">
+EMS ADMIN
+</div>
+
+<ul>
+ <li ><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+ <li ><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+ <li ><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+ <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+ <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+ <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+ <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+ <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+ <li ><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+ <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+ <li class="active"><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+ <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+ <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+ <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+ </ul>
+
+</div>
+
+
+<div class="main">
+
+<!-- Topbar -->
+
+<div class="topbar">
+
+<div class="title">
+EMPLOYEE MANAGEMENT SYSTEM
+</div>
+
+<div class="search-box">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input type="text" placeholder="Search anything...">
+</div>
+
+<div class="top-right">
+
+<div class="icon-box">
+<i class="fa-regular fa-bell"></i>
+<span class="badge">3</span>
+</div>
+
+<div class="icon-box">
+<i class="fa-regular fa-envelope"></i>
+<span class="badge">5</span>
+</div>
+
+<div class="profile">
+
+<img src="http=5">
+
+<div>
+<h4>Admin User</h4>
+<small>Administrator</small>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Content -->
+
+<div class="content">
+
+<div class="header">
+
+<h1>Mentorship Management</h1>
+
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add Mentorship
+</button>
+
+</div>
+
+
+<!-- Cards -->
+
+<div class="cards">
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-users"></i></div>
+<div>
+<p>Total Mentorships</p>
+<h2>24</h2>
+<small>All Time</small>
+</div>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-user-group"></i></div>
+<div>
+<p>Active Mentorships</p>
+<h2>18</h2>
+<small>Currently Active</small>
+</div>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-solid fa-circle-check"></i></div>
+<div>
+<p>Completed Mentorships</p>
+<h2>6</h2>
+<small>All Time</small>
+</div>
+</div>
+
+<div class="card">
+<div class="icon"><i class="fa-regular fa-calendar-check"></i></div>
+<div>
+<p>Upcoming Reviews</p>
+<h2>7</h2>
+<small>Next 30 Days</small>
+</div>
+</div>
+
+</div>
+
+
+<!-- Filters -->
+
+<div class="filters">
+
+<input type="text" placeholder="Search mentor or mentee...">
+
+<select>
+<option>All Departments</option>
+</select>
+
+<select>
+<option>All Status</option>
+</select>
+
+<select>
+<option>All Mentorship Types</option>
+</select>
+
+<input type="text" value="01/05/2025 - 31/05/2025">
+
+<button class="filter-btn">
+<i class="fa-solid fa-filter"></i>
+Filter
+</button>
+
+</div>
+<!-- Table -->
+
+<div class="table-box">
+
+<table>
+
+<thead>
+<tr>
+<th>Mentor</th>
+<th>Mentee</th>
+<th>Department</th>
+<th>Mentorship Type</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Status</th>
+<th>Next Review</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=11">
+<div>
+<h4>David Brown</h4>
+<p>Team Lead</p>
+</div>
+</div>
+</td>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=21">
+<div>
+<h4>Aarav Sharma</h4>
+<p>Software Engineer</p>
+</div>
+</div>
+</td>
+
+<td>IT</td>
+<td>Career Guidance</td>
+<td>01/04/2025</td>
+<td>30/09/2025</td>
+
+<td>
+<span class="status active-status">
+Active
+</span>
+</td>
+
+<td>15/06/2025</td>
+
+<td>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=12">
+<div>
+<h4>Sarah Johnson</h4>
+<p>HR Manager</p>
+</div>
+</div>
+</td>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=22">
+<div>
+<h4>Priya Patel</h4>
+<p>HR Executive</p>
+</div>
+</div>
+</td>
+
+<td>HR</td>
+<td>Skill Development</td>
+<td>15/03/2025</td>
+<td>15/09/2025</td>
+
+<td>
+<span class="status active-status">
+Active
+</span>
+</td>
+
+<td>10/06/2025</td>
+
+<td>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=13">
+<div>
+<h4>Mike Smith</h4>
+<p>Project Manager</p>
+</div>
+</div>
+</td>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=23">
+<div>
+<h4>Rohan Mehta</h4>
+<p>Project Analyst</p>
+</div>
+</div>
+</td>
+
+<td>Projects</td>
+<td>Project Mentoring</td>
+<td>01/02/2025</td>
+<td>31/05/2025</td>
+
+<td>
+<span class="status completed-status">
+Completed
+</span>
+</td>
+
+<td>-</td>
+
+<td>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=14">
+<div>
+<h4>Emily Davis</h4>
+<p>Finance Manager</p>
+</div>
+</div>
+</td>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=24">
+<div>
+<h4>Sneha Iyer</h4>
+<p>Finance Executive</p>
+</div>
+</div>
+</td>
+
+<td>Finance</td>
+<td>Career Guidance</td>
+<td>10/04/2025</td>
+<td>10/10/2025</td>
+
+<td>
+<span class="status active-status">
+Active
+</span>
+</td>
+
+<td>20/06/2025</td>
+
+<td>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=15">
+<div>
+<h4>John Doe</h4>
+<p>Tech Lead</p>
+</div>
+</div>
+</td>
+
+<td>
+<div class="person">
+<img src="https://i.pravatar.cc/50?img=25">
+<div>
+<h4>Vikram Singh</h4>
+<p>Software Engineer</p>
+</div>
+</div>
+</td>
+
+<td>IT</td>
+<td>Skill Development</td>
+<td>05/05/2025</td>
+<td>05/11/2025</td>
+
+<td>
+<span class="status upcoming-status">
+Upcoming
+</span>
+</td>
+
+<td>01/07/2025</td>
+
+<td>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- Footer -->
+
+<div class="footer">
+
+<div>
+Showing 1 to 5 of 24 entries
+</div>
+
+<div class="pagination">
+
+<div class="page">
+<i class="fa-solid fa-angle-left"></i>
+</div>
+
+<div class="page active">1</div>
+
+<div class="page">2</div>
+
+<div class="page">3</div>
+
+<div class="page">...</div>
+
+<div class="page">5</div>
+
+<div class="page">
+<i class="fa-solid fa-angle-right"></i>
+</div>
+
+</div>
+
+</div>
+<!-- Mentorship Insights -->
+
+<div class="insights">
+
+<div class="insight-card">
+
+<div class="insight-icon">
+<i class="fa-solid fa-users"></i>
+</div>
+
+<div>
+<h4>Average Mentorship Duration</h4>
+<h2>6.2 Months</h2>
+</div>
+
+</div>
+
+
+<div class="insight-card">
+
+<div class="insight-icon">
+<i class="fa-regular fa-star"></i>
+</div>
+
+<div>
+<h4>Satisfaction Score</h4>
+<h2>4.6 / 5</h2>
+</div>
+
+</div>
+
+
+
+<div class="insight-card">
+
+<div class="insight-icon">
+<i class="fa-regular fa-circle-check"></i>
+</div>
+
+<div>
+<h4>Completion Rate</h4>
+<h2>75%</h2>
+</div>
+
+</div>
+
+
+
+<div class="insight-card">
+
+<div class="insight-icon">
+<i class="fa-regular fa-calendar-check"></i>
+</div>
+
+<div>
+<h4>Upcoming Reviews</h4>
+<h2>7</h2>
+<p>Next 30 Days</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
