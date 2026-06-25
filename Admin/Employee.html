@@ -17,186 +17,287 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 }
 
 body{
-    background:#f4f6f9;
+    background:#0b1437;
     display:flex;
     height:100vh;
     overflow:hidden;
 }
 
-/* Sidebar */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar{
-    width:250px;
+    width:230px;
     height:100vh;
-    background:white;
-    border-right:1px solid #ddd;
+    background:#111c44;
+    border-right:1px solid #1b2e6e;
     position:fixed;
     overflow:auto;
 }
 
 .logo{
     padding:18px 25px;
-    font-size:22px;
-    font-weight:bold;
-    border-bottom:1px solid #eee;
+    font-size:20px;
+    font-weight:700;
+    color:#ffffff;
+    border-bottom:1px solid #1b2e6e;
 }
 
 .sidebar ul{
     list-style:none;
+    padding:10px 0;
 }
 
 .sidebar ul li{
-    padding:14px 25px;
+    padding:13px 22px;
     display:flex;
-    gap:15px;
+    gap:14px;
     align-items:center;
     cursor:pointer;
     transition:.3s;
-    font-size:15px;
-    color:#555;
+    color:#8898aa;
+    font-size:14px;
 }
 
 .sidebar ul li a{
     text-decoration:none;
     color:inherit;
     display:flex;
-    gap:15px;
+    gap:14px;
     align-items:center;
     width:100%;
 }
 
 .sidebar ul li:hover,
 .sidebar ul li.active{
-    background:#f0f2f5;
-    color:black;
+    background:#1b2e6e;
+    color:#ffffff;
 }
 
-/* Main */
+/* =========================
+   MAIN
+========================= */
 
 .main{
-    margin-left:250px;
-    width:calc(100% - 250px);
+    margin-left:230px;
+    width:calc(100% - 230px);
     height:100vh;
     display:flex;
     flex-direction:column;
 }
 
-/* Topbar */
+/* =========================
+   TOPBAR
+========================= */
 
 .topbar{
     height:65px;
-    background:white;
-    padding:0 25px;
+    background:#111c44;
+    border-bottom:1px solid #1b2e6e;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    border-bottom:1px solid #ddd;
+    padding:0 25px;
 }
 
-.search{
-    background:#f4f6f9;
-    padding:10px 15px;
+.title{
+    font-size:18px;
+    font-weight:700;
+    color:#ffffff;
+    letter-spacing:.4px;
+}
+
+.search-box{
+    width:380px;
+    height:42px;
+    background:#0b1437;
+    border:1px solid #1b2e6e;
     border-radius:10px;
-    width:350px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 15px;
+    color:#8898aa;
 }
 
-.search input{
+.search-box input{
     border:none;
     outline:none;
     background:none;
-    width:90%;
+    width:100%;
+    color:#ffffff;
+    font-size:14px;
 }
 
-.right{
+.search-box input::placeholder{
+    color:#8898aa;
+}
+
+.top-right{
     display:flex;
     align-items:center;
-    gap:20px;
-    font-size:18px;
+    gap:22px;
+}
+
+.icon-box{
+    position:relative;
+    width:38px;
+    height:38px;
+    background:#0b1437;
+    border:1px solid #1b2e6e;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#8898aa;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.icon-box:hover{
+    color:#4299e1;
+    border-color:#4299e1;
+}
+
+.badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:17px;
+    height:17px;
+    background:#4299e1;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:10px;
+    font-weight:600;
 }
 
 .profile{
     display:flex;
     align-items:center;
     gap:12px;
+    padding:5px 10px;
+    border:1px solid #1b2e6e;
+    border-radius:10px;
 }
 
 .profile img{
     width:40px;
     height:40px;
     border-radius:50%;
+    border:2px solid #4299e1;
 }
 
-/* Content */
+.profile h4{
+    color:#ffffff;
+    font-size:14px;
+}
+
+.profile small{
+    color:#8898aa;
+    font-size:12px;
+}
+
+.profile i{
+    color:#8898aa;
+    font-size:12px;
+}
+/* =========================
+   CONTENT
+========================= */
 
 .content{
     flex:1;
-    padding:15px 20px;
+    overflow:hidden;
     display:flex;
     flex-direction:column;
-    overflow:hidden;
+    padding:20px;
+    background:#0b1437;
 }
-
-/* Header */
 
 .header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .header h1{
+    color:#ffffff;
     font-size:28px;
 }
 
 .add-btn{
-    background:#111827;
-    color:white;
+    background:#4299e1;
+    color:#fff;
     border:none;
-    padding:12px 20px;
+    padding:12px 22px;
     border-radius:10px;
-    font-size:15px;
     cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.3s;
 }
 
-/* Search */
+.add-btn:hover{
+    background:#3182ce;
+}
+
+/* =========================
+   SEARCH
+========================= */
 
 .search-filter{
     display:flex;
     gap:15px;
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
 .search-box{
-    background:white;
-    padding:12px 18px;
-    border-radius:10px;
     width:400px;
-    border:1px solid #ddd;
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    border-radius:10px;
+    padding:12px 18px;
+    color:#8898aa;
 }
 
 .search-box input{
     border:none;
     outline:none;
+    background:none;
     width:90%;
+    color:#ffffff;
+}
+
+.search-box input::placeholder{
+    color:#8898aa;
 }
 
 .filter-btn{
-    padding:12px 25px;
-    background:white;
-    border:1px solid #ddd;
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    color:#ffffff;
+    padding:12px 22px;
     border-radius:10px;
     cursor:pointer;
 }
 
-/* Table */
+/* =========================
+   TABLE
+========================= */
 
 .table-container{
     flex:1;
-    background:white;
+    background:#111c44;
     border-radius:15px;
+    border:1px solid #1b2e6e;
     overflow:hidden;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    box-shadow:0 4px 20px rgba(0,0,0,.30);
 }
 
 table{
@@ -204,17 +305,27 @@ table{
     border-collapse:collapse;
 }
 
+thead{
+    background:#16265c;
+}
+
 th{
-    background:#fafafa;
-    padding:15px;
+    padding:16px;
     text-align:left;
+    color:#ffffff;
     font-size:14px;
+    font-weight:600;
 }
 
 td{
-    padding:14px 15px;
-    border-top:1px solid #eee;
+    padding:15px;
+    color:#d7dfef;
+    border-top:1px solid #1b2e6e;
     font-size:14px;
+}
+
+tbody tr:hover{
+    background:#16265c;
 }
 
 .employee{
@@ -224,41 +335,46 @@ td{
 }
 
 .employee img{
-    width:38px;
-    height:38px;
+    width:40px;
+    height:40px;
     border-radius:50%;
+    border:2px solid #4299e1;
 }
 
 .status{
+    display:inline-block;
     padding:6px 14px;
     border-radius:20px;
-    font-size:13px;
-    display:inline-block;
+    font-size:12px;
+    font-weight:600;
 }
 
-.active{
-    background:#dcfce7;
-    color:#15803d;
+.status.active{
+    background:rgba(34,197,94,.18);
+    color:#4ade80;
 }
 
-.inactive{
-    background:#fee2e2;
-    color:#dc2626;
+.status.inactive{
+    background:rgba(239,68,68,.18);
+    color:#f87171;
 }
 
 .edit{
-    font-size:16px;
+    color:#4299e1;
     cursor:pointer;
+    font-size:17px;
 }
 
-/* Footer */
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
+    margin-top:18px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-top:15px;
-    font-size:14px;
+    color:#8898aa;
 }
 
 .pagination{
@@ -267,22 +383,29 @@ td{
 }
 
 .page{
-    width:35px;
-    height:35px;
-    background:white;
-    border-radius:8px;
+    width:36px;
+    height:36px;
     display:flex;
     justify-content:center;
     align-items:center;
-    border:1px solid #ddd;
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    border-radius:8px;
+    color:#8898aa;
     cursor:pointer;
+    transition:.3s;
+}
+
+.page:hover{
+    background:#1b2e6e;
+    color:#ffffff;
 }
 
 .page.active{
-    background:#111827;
-    color:white;
+    background:#4299e1;
+    color:#ffffff;
+    border-color:#4299e1;
 }
-
 </style>
 </head>
 <body>
@@ -319,28 +442,43 @@ EMS ADMIN
 
 <div class="topbar">
 
-<div class="search">
-<i class="fa fa-search"></i>
-<input type="text" placeholder="Search anything...">
+    <div class="title">
+        EMPLOYEE MANAGEMENT SYSTEM
+    </div>
+
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search anything...">
+    </div>
+
+    <div class="top-right">
+
+        <div class="icon-box">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge">3</span>
+        </div>
+
+        <div class="icon-box">
+            <i class="fa-regular fa-envelope"></i>
+            <span class="badge">5</span>
+        </div>
+
+        <div class="profile">
+
+            <img src="https://i.pravatar.cc/50?img=5" alt="Profile">
+
+            <div>
+                <h4>John Doe</h4>
+                <small>Manager</small>
+            </div>
+
+            <i class="fa-solid fa-angle-down"></i>
+
+        </div>
+
+    </div>
+
 </div>
-
-<div class="right">
-
-<i class="fa-regular fa-bell"></i>
-<i class="fa-regular fa-envelope"></i>
-
-<div class="profile">
-<img src="">
-<div>
-<h4>John Doe</h4>
-<small>Admin</small>
-</div>
-</div>
-
-</div>
-
-</div>
-
 
 
 <div class="content">

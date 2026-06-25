@@ -4,509 +4,602 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-body{
-    background:#f5f6fa;
-    display:flex;
-    height:100vh;
-    overflow:hidden;
+body {
+    background: #0b1437;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* Sidebar */
-
-.sidebar{
-    width:250px;
-    height:100vh;
-    background:white;
-    border-right:1px solid #ddd;
-    position:fixed;
-    overflow:auto;
+/* ── TOP NAVBAR ── */
+.navbar {
+    height: 60px;
+    background: #111c44;
+    border-bottom: 1px solid #1b2e6e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    flex-shrink: 0;
+    z-index: 100;
 }
 
-.logo{
-    padding:18px 25px;
-    font-size:22px;
-    font-weight:bold;
-    border-bottom:1px solid #eee;
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.sidebar ul{
-    list-style:none;
+.navbar-left .hamburger {
+    font-size: 20px;
+    color: #8898aa;
+    cursor: pointer;
 }
 
-.sidebar ul li{
-    padding:14px 25px;
-    display:flex;
-    gap:15px;
-    align-items:center;
-    cursor:pointer;
-    transition:.3s;
-    font-size:15px;
-    color:#555;
+.navbar-logo {
+    width: 40px;
+    height: 40px;
+    background: #1b2e6e;
+    border: 2px solid #4299e1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #4299e1;
 }
 
-.sidebar ul li a{
-    text-decoration:none;
-    color:inherit;
-    display:flex;
-    gap:15px;
-    align-items:center;
-    width:100%;
+.navbar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.navbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 40px;
+}
+
+.nav-search {
+    width: 100%;
+    max-width: 420px;
+    background: #0b1437;
+    border: 1px solid #1b2e6e;
+    border-radius: 10px;
+    padding: 9px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-search i {
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.nav-search input {
+    border: none;
+    outline: none;
+    background: none;
+    width: 100%;
+    color: #e2e8f0;
+    font-size: 14px;
+}
+
+.nav-search input::placeholder {
+    color: #4a5568;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-icon-btn {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    background: #0b1437;
+    border: 1px solid #1b2e6e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #8898aa;
+    font-size: 16px;
+}
+
+.nav-icon-btn .badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #4299e1;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #1b2e6e;
+}
+
+.nav-profile-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1b2e6e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8898aa;
+    font-size: 16px;
+}
+
+.nav-profile-info h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.nav-profile-info small {
+    font-size: 11px;
+    color: #8898aa;
+}
+
+.nav-profile i.fa-chevron-down {
+    font-size: 11px;
+    color: #8898aa;
+}
+
+/* ── BODY BELOW NAVBAR ── */
+.body-wrap {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+    width: 230px;
+    height: 100%;
+    background: #111c44;
+    border-right: 1px solid #1b2e6e;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.sidebar ul li {
+    padding: 12px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+    transition: .3s;
+    font-size: 14px;
+    color: #8898aa;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
 }
 
 .sidebar ul li:hover,
-.sidebar ul li.active{
-    background:#f0f2f5;
-    color:black;
+.sidebar ul li.active {
+    background: #1b2e6e;
+    color: #ffffff;
 }
 
-/* Main */
-
-.main{
-    margin-left:250px;
-    width:calc(100% - 250px);
-    height:100vh;
-    display:flex;
-    flex-direction:column;
+/* ── MAIN ── */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-/* Topbar */
-
-.topbar{
-    height:65px;
-    background:white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 25px;
-    border-bottom:1px solid #ddd;
+/* ── PAGE HEADER ── */
+.page-header {
+    padding: 18px 20px 0 20px;
+    background: #0b1437;
 }
 
-.search-box{
-    width:350px;
-    background:#f5f6fa;
-    padding:10px 15px;
-    border-radius:10px;
+.page-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
 }
 
-.search-box input{
-    border:none;
-    outline:none;
-    background:none;
-    width:90%;
+/* ── CONTENT ── */
+.content {
+    flex: 1;
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    background: #0b1437;
 }
 
-.top-right{
-    display:flex;
-    align-items:center;
-    gap:25px;
-    font-size:18px;
+.welcome {
+    background: #111c44;
+    padding: 18px 25px;
+    border-radius: 15px;
+    border: 1px solid #1b2e6e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
+.welcome-left h1 {
+    font-size: 22px;
+    color: #ffffff;
 }
 
-.profile img{
-    width:42px;
-    height:42px;
-    border-radius:50%;
+.welcome-left p {
+    color: #8898aa;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
-/* Content */
-
-.content{
-    flex:1;
-    padding:15px;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.date-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #0b1437;
+    border: 1px solid #1b2e6e;
+    border-radius: 10px;
+    padding: 10px 18px;
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
 }
 
-/* Welcome */
-
-.welcome{
-    background:white;
-    padding:18px 25px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+.date-box i {
+    color: #4299e1;
+    font-size: 15px;
 }
 
-.welcome h1{
-    font-size:28px;
+.date-box i.fa-chevron-down {
+    color: #8898aa;
+    font-size: 12px;
 }
 
-.welcome p{
-    color:#777;
-    margin-top:5px;
+.welcome h1 {
+    font-size: 22px;
+    color: #ffffff;
 }
 
-/* Cards */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:15px;
+.welcome p {
+    color: #8898aa;
+    margin-top: 5px;
+    font-size: 14px;
 }
 
-.card{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+.cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
 }
 
-.card i{
-    font-size:28px;
-    color:#4a6cf7;
-    margin-bottom:10px;
+.card {
+    background: #111c44;
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid #1b2e6e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.card p{
-    color:#666;
-    font-size:14px;
+.card i {
+    font-size: 26px;
+    color: #4299e1;
+    margin-bottom: 10px;
 }
 
-.card h2{
-    margin-top:8px;
-    font-size:28px;
+.card p {
+    color: #8898aa;
+    font-size: 13px;
 }
 
-/* Middle Section */
-
-.sections{
-    display:grid;
-    grid-template-columns:1.2fr 1fr 1fr;
-    gap:15px;
+.card h2 {
+    margin-top: 6px;
+    font-size: 26px;
+    color: #ffffff;
 }
 
-.box{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+.bottom {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
 }
 
-.box h3{
-    margin-bottom:15px;
+.chart {
+    background: #111c44;
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid #1b2e6e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.activity{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:12px;
-    color:#555;
-    font-size:14px;
+.chart h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 15px;
 }
 
-/* Bottom Section */
-
-.bottom{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:15px;
+.bar {
+    height: 110px;
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
 }
 
-.chart{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
+.bar div {
+    width: 40px;
+    background: #4299e1;
+    border-radius: 6px 6px 0 0;
 }
 
-.chart h3{
-    margin-bottom:15px;
+.bar div:nth-child(even) {
+    background: #00b5d8;
 }
 
-.bar{
-    height:120px;
-    display:flex;
-    align-items:flex-end;
-    gap:18px;
+.leave {
+    background: #111c44;
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid #1b2e6e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    text-align: center;
 }
 
-.bar div{
-    width:40px;
-    background:#4a6cf7;
-    border-radius:6px 6px 0 0;
+.leave h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 15px;
 }
 
-.leave{
-    background:white;
-    padding:18px;
-    border-radius:15px;
-    box-shadow:0 2px 10px rgba(0,0,0,.05);
-    text-align:center;
-}
-
-.leave h3{
-    margin-bottom:15px;
-}
-
-.circle{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    margin:auto;
-    background:conic-gradient(
-        #4a6cf7 0 50%,
-        #9fa8ff 50% 80%,
-        #ddd 80% 100%
+.circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin: auto;
+    background: conic-gradient(
+        #4299e1 0 50%,
+        #00b5d8 50% 80%,
+        #1b2e6e 80% 100%
     );
 }
 
-.leave p{
-    margin-top:8px;
-    color:#555;
+.leave p {
+    margin-top: 8px;
+    color: #8898aa;
+    font-size: 14px;
 }
 
-/* Responsive */
+.sections {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 15px;
+}
 
-@media(max-width:1200px){
+.box {
+    background: #111c44;
+    padding: 18px;
+    border-radius: 15px;
+    border: 1px solid #1b2e6e;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
+.box h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 15px;
+}
 
-    .sections{
-        grid-template-columns:1fr;
-    }
+.activity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #8898aa;
+    font-size: 13px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1b2e6e;
+}
 
-    .bottom{
-        grid-template-columns:1fr;
-    }
+.activity:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
 
-    body{
-        overflow:auto;
-    }
+@media(max-width: 1200px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .bottom { grid-template-columns: 1fr; }
+    .sections { grid-template-columns: 1fr; }
+    body { overflow: auto; }
 }
 </style>
 </head>
 <body>
 
-<!-- Sidebar -->
-
-<div class="sidebar">
-
-<div class="logo">
-EMS ADMIN
+<!-- TOP NAVBAR -->
+<div class="navbar">
+    <div class="navbar-left">
+        <div class="hamburger"><i class="fa-solid fa-bars"></i></div>
+        <div class="navbar-logo">LOGO</div>
+        <span class="navbar-title">EMPLOYEE MANAGEMENT SYSTEM</span>
+    </div>
+    <div class="navbar-center">
+        <div class="nav-search">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search anything...">
+        </div>
+    </div>
+    <div class="navbar-right">
+        <div class="nav-icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge">3</span>
+        </div>
+        <div class="nav-icon-btn">
+            <i class="fa-regular fa-envelope"></i>
+            <span class="badge">5</span>
+        </div>
+        <div class="nav-profile">
+            <div class="nav-profile-avatar">
+                <i class="fa-regular fa-user"></i>
+            </div>
+            <div class="nav-profile-info">
+                <h4>John Doe</h4>
+                <small>Admin</small>
+            </div>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
 </div>
 
-<ul>
- <li class="active"><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
- <li><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
- <li><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
- <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
- <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
- <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
- <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
- <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
- <li><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
- <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
- <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
- <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
- <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
- <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
- </ul>
+<!-- BODY WRAP -->
+<div class="body-wrap">
 
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <ul>
+            <li class="active"><a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+            <li><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
+            <li><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
+            <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+            <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
+            <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
+            <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
+            <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
+            <li><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
+            <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
+            <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
+            <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
+            <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
+            <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+        </ul>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- PAGE HEADING -->
+        <div class="page-header">
+            <h2>Admin Dashboard</h2>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div class="welcome">
+    <div class="welcome-left">
+        <h1>Welcome Back, John Doe 👋</h1>
+        <p>Here's what's happening in your organization today.</p>
+    </div>
+    <div class="date-box">
+        <i class="fa-regular fa-calendar"></i>
+        <span>June 25, 2026</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
 </div>
 
+            <!-- Cards -->
+            <div class="cards">
+                <div class="card"><i class="fa-solid fa-users"></i><p>Total Employees</p><h2>256</h2></div>
+                <div class="card"><i class="fa-solid fa-building"></i><p>Departments</p><h2>12</h2></div>
+                <div class="card"><i class="fa-solid fa-calendar-days"></i><p>Pending Leaves</p><h2>18</h2></div>
+                <div class="card"><i class="fa-solid fa-user-check"></i><p>Attendance</p><h2>92%</h2></div>
+                <div class="card"><i class="fa-solid fa-folder-open"></i><p>Active Projects</p><h2>8</h2></div>
+            </div>
 
-<div class="main">
+            <!-- Middle: Attendance + Leave -->
+            <div class="bottom">
+                <div class="chart">
+                    <h3>Attendance Overview</h3>
+                    <div class="bar">
+                        <div style="height:80%"></div>
+                        <div style="height:85%"></div>
+                        <div style="height:75%"></div>
+                        <div style="height:90%"></div>
+                        <div style="height:88%"></div>
+                        <div style="height:70%"></div>
+                    </div>
+                </div>
+                <div class="leave">
+                    <h3>Leave Overview</h3>
+                    <div class="circle"></div>
+                    <br>
+                    <p>Approved : 25</p>
+                    <p>Pending : 15</p>
+                    <p>Rejected : 10</p>
+                </div>
+            </div>
 
-<!-- Topbar -->
+            <!-- Bottom: Activities, Events, Notifications -->
+            <div class="sections">
+                <div class="box">
+                    <h3>Recent Activities</h3>
+                    <div class="activity"><span>Leave Request Submitted</span><span>10:30 AM</span></div>
+                    <div class="activity"><span>Project Updated</span><span>09:15 AM</span></div>
+                    <div class="activity"><span>Document Uploaded</span><span>Yesterday</span></div>
+                    <div class="activity"><span>New Employee Added</span><span>2 days ago</span></div>
+                </div>
+                <div class="box">
+                    <h3>Upcoming Events</h3>
+                    <div class="activity"><span>Performance Review</span><span>10 May</span></div>
+                    <div class="activity"><span>Project Deadline</span><span>12 May</span></div>
+                    <div class="activity"><span>Team Building</span><span>15 May</span></div>
+                </div>
+                <div class="box">
+                    <h3>Notifications</h3>
+                    <div class="activity"><span>Leave Request from Emma</span><span>10:30 AM</span></div>
+                    <div class="activity"><span>New Project Assigned</span><span>09:20 AM</span></div>
+                    <div class="activity"><span>Policy Update</span><span>Yesterday</span></div>
+                </div>
+            </div>
 
-<div class="topbar">
-
-<div class="search-box">
-<i class="fa fa-search"></i>
-<input type="text" placeholder="Search anything...">
-</div>
-
-<div class="top-right">
-<i class="fa-regular fa-bell"></i>
-<i class="fa-regular fa-envelope"></i>
-
-<div class="profile">
-<img src="">
-<div>
-<h4>John Doe</h4>
-<small>Admin</small>
-</div>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- Content -->
-
-<div class="content">
-
-<div class="welcome">
-<h1>Welcome Back, John Doe 👋</h1>
-<p>Here's what's happening in your organization today.</p>
-</div>
-
-<!-- Cards -->
-
-<div class="cards">
-
-<div class="card">
-<i class="fa-solid fa-users"></i>
-<p>Total Employees</p>
-<h2>256</h2>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-building"></i>
-<p>Departments</p>
-<h2>12</h2>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-calendar-days"></i>
-<p>Pending Leaves</p>
-<h2>18</h2>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-user-check"></i>
-<p>Attendance</p>
-<h2>92%</h2>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-folder-open"></i>
-<p>Active Projects</p>
-<h2>8</h2>
-</div>
-
-</div>
-
-
-<!-- Sections -->
-
-<div class="sections">
-
-<div class="box">
-<h3>Recent Activities</h3>
-
-<div class="activity">
-<span>Leave Request Submitted</span>
-<span>10:30 AM</span>
-</div>
-
-<div class="activity">
-<span>Project Updated</span>
-<span>09:15 AM</span>
-</div>
-
-<div class="activity">
-<span>Document Uploaded</span>
-<span>Yesterday</span>
-</div>
-
-<div class="activity">
-<span>New Employee Added</span>
-<span>2 days ago</span>
-</div>
-
-</div>
-
-<div class="box">
-<h3>Upcoming Events</h3>
-
-<div class="activity">
-<span>Performance Review</span>
-<span>10 May</span>
-</div>
-
-<div class="activity">
-<span>Project Deadline</span>
-<span>12 May</span>
-</div>
-
-<div class="activity">
-<span>Team Building</span>
-<span>15 May</span>
-</div>
-
-</div>
-
-<div class="box">
-<h3>Notifications</h3>
-
-<div class="activity">
-<span>Leave Request from Emma</span>
-<span>10:30 AM</span>
-</div>
-
-<div class="activity">
-<span>New Project Assigned</span>
-<span>09:20 AM</span>
-</div>
-
-<div class="activity">
-<span>Policy Update</span>
-<span>Yesterday</span>
-</div>
-
-</div>
-
-</div>
-
-
-<!-- Bottom -->
-
-<div class="bottom">
-
-<div class="chart">
-<h3>Attendance Overview</h3>
-
-<div class="bar">
-<div style="height:80%"></div>
-<div style="height:85%"></div>
-<div style="height:75%"></div>
-<div style="height:90%"></div>
-<div style="height:88%"></div>
-<div style="height:70%"></div>
-</div>
-
-</div>
-
-<div class="leave">
-
-<h3>Leave Overview</h3>
-
-<div class="circle"></div>
-
-<br>
-
-<p>Approved : 25</p>
-<p>Pending : 15</p>
-<p>Rejected : 10</p>
-
-</div>
-
-</div>
-
-</div>
-
+        </div>
+    </div>
 </div>
 
 </body>

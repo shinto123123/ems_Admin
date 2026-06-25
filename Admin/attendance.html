@@ -6,38 +6,373 @@
 <title>Attendance Management</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
- .sidebar ul li a{
- text-decoration:none;
- color:inherit;
- display:flex;
- gap:15px;
- align-items:center;
- width:100%;
- }
- </style>
- <style>
- *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
- body{background:#f5f7fa;display:flex}
- .sidebar{width:250px;height:100vh;background:white;border-right:1px solid #ddd;position:fixed;overflow:auto}
- .logo{padding:18px 25px;font-size:22px;font-weight:bold;border-bottom:1px solid #eee}
- .sidebar ul{list-style:none}
- .sidebar ul li{padding:14px 25px;display:flex;gap:15px;align-items:center;cursor:pointer;transition:.3s;font-size:15px;color:#555}
- .sidebar ul li:hover,.sidebar ul li.active{background:#f0f2f5;color:black}
- .main{margin-left:250px;width:calc(100% - 250px)}
- .topbar{height:80px;background:white;display:flex;justify-content:space-between;align-items:center;padding:0 30px;border-bottom:1px solid #ddd}
- .search{background:#f5f7fa;padding:12px 20px;border-radius:10px;width:400px}
- .search input{border:none;outline:none;background:none;width:90%}
- .right{display:flex;gap:25px;align-items:center}
- .profile{display:flex;align-items:center;gap:15px}
- .profile img{width:45px;height:45px;border-radius:50%}
- .content{padding:30px}
- .header{display:flex;justify-content:space-between;margin-bottom:25px}
- .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
- .card{background:white;padding:25px;border-radius:15px}
- .table-box{background:white;border-radius:15px;overflow:hidden;margin-top:25px}
- table{width:100%;border-collapse:collapse}
- th,td{padding:18px;border-top:1px solid #eee;text-align:left}
- .status{padding:7px 15px;border-radius:20px;background:#dcfce7;color:#15803d}
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:#0b1437;
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    width:230px;
+    height:100vh;
+    background:#111c44;
+    border-right:1px solid #1b2e6e;
+    position:fixed;
+    overflow:auto;
+}
+
+.logo{
+    padding:18px 25px;
+    font-size:20px;
+    font-weight:700;
+    color:#ffffff;
+    border-bottom:1px solid #1b2e6e;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding:10px 0;
+}
+
+.sidebar ul li{
+    padding:13px 22px;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    cursor:pointer;
+    transition:.3s;
+    color:#8898aa;
+    font-size:14px;
+}
+
+.sidebar ul li a{
+    text-decoration:none;
+    color:inherit;
+    display:flex;
+    gap:14px;
+    align-items:center;
+    width:100%;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active{
+    background:#1b2e6e;
+    color:#ffffff;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:230px;
+    width:calc(100% - 230px);
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+/* =========================
+   TOPBAR
+========================= */
+
+.topbar{
+    height:65px;
+    background:#111c44;
+    border-bottom:1px solid #1b2e6e;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+}
+
+.title{
+    font-size:18px;
+    font-weight:700;
+    color:#ffffff;
+    letter-spacing:.4px;
+}
+
+.search-box{
+    width:380px;
+    height:42px;
+    background:#0b1437;
+    border:1px solid #1b2e6e;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 15px;
+    color:#8898aa;
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    background:none;
+    width:100%;
+    color:#ffffff;
+    font-size:14px;
+}
+
+.search-box input::placeholder{
+    color:#8898aa;
+}
+
+.top-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.icon-box{
+    position:relative;
+    width:38px;
+    height:38px;
+    background:#0b1437;
+    border:1px solid #1b2e6e;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#8898aa;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.icon-box:hover{
+    color:#4299e1;
+    border-color:#4299e1;
+}
+
+.badge{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    width:17px;
+    height:17px;
+    background:#4299e1;
+    color:#ffffff;
+    border-radius:50%;
+    font-size:10px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:600;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:5px 10px;
+    border:1px solid #1b2e6e;
+    border-radius:10px;
+}
+
+.profile img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:2px solid #4299e1;
+}
+
+.profile h4{
+    color:#ffffff;
+    font-size:14px;
+}
+
+.profile small{
+    color:#8898aa;
+    font-size:12px;
+}
+
+.profile i{
+    color:#8898aa;
+    font-size:12px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    flex:1;
+    overflow:auto;
+    padding:20px;
+    background:#0b1437;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.header h1{
+    color:#ffffff;
+    font-size:28px;
+}
+
+.header p{
+    color:#8898aa;
+    margin-top:5px;
+}
+
+/* =========================
+   STAT CARDS
+========================= */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    border-radius:15px;
+    padding:22px;
+    box-shadow:0 4px 20px rgba(0,0,0,.30);
+}
+
+.card h3{
+    color:#8898aa;
+    font-size:14px;
+    font-weight:500;
+    margin-bottom:12px;
+}
+
+.card h1{
+    color:#ffffff;
+    font-size:30px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-box{
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 4px 20px rgba(0,0,0,.30);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead,
+tr:first-child{
+    background:#16265c;
+}
+
+th{
+    color:#ffffff;
+    padding:16px;
+    text-align:left;
+    font-size:14px;
+    font-weight:600;
+}
+
+td{
+    padding:15px 16px;
+    border-top:1px solid #1b2e6e;
+    color:#d7dfef;
+    font-size:14px;
+}
+
+tbody tr:hover{
+    background:#16265c;
+}
+
+.status{
+    display:inline-block;
+    padding:6px 15px;
+    border-radius:20px;
+    background:rgba(34,197,94,.18);
+    color:#4ade80;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#1b2e6e;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0b1437;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .search{
+        width:250px;
+    }
+}
+
+@media(max-width:768px){
+
+    body{
+        overflow:auto;
+    }
+
+    .sidebar{
+        width:200px;
+    }
+
+    .main{
+        margin-left:200px;
+        width:calc(100% - 200px);
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        padding:0 15px;
+    }
+}
  </style>
 </head>
 <body>
@@ -62,8 +397,43 @@
  </div>
 <div class="main">
 <div class="topbar">
-<div class="search"><i class="fa fa-search"></i><input placeholder="Search anything..."></div>
-<div class="right"><i class="fa-regular fa-bell"></i><div class="profile"><img src="5"><div><h4>Admin User</h4><small>Administrator</small></div></div></div>
+
+    <div class="title">
+        EMPLOYEE MANAGEMENT SYSTEM
+    </div>
+
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search anything...">
+    </div>
+
+    <div class="top-right">
+
+        <div class="icon-box">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge">3</span>
+        </div>
+
+        <div class="icon-box">
+            <i class="fa-regular fa-envelope"></i>
+            <span class="badge">5</span>
+        </div>
+
+        <div class="profile">
+
+            <img src="https://i.pravatar.cc/50?img=5" alt="Profile">
+
+            <div>
+                <h4>John Doe</h4>
+                <small>Manager</small>
+            </div>
+
+            <i class="fa-solid fa-angle-down"></i>
+
+        </div>
+
+    </div>
+
 </div>
 <div class="content">
 <div class="header"><div><h1>Attendance Management</h1><p>View and monitor attendance marked by managers</p></div></div>
