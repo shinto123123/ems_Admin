@@ -1,147 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Attendance Management</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="attendance.css">
 <style>
- *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    /* =============================================
+   ATTENDANCE MANAGEMENT — Dark Navy Theme
+   Matches: index.html palette exactly
+   ============================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-body{
-    background:#0b1437;
-    display:flex;
-    height:100vh;
-    overflow:hidden;
+body {
+    background: #0b1437;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    color: #e2e8f0;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-    width:230px;
-    height:100vh;
-    background:#111c44;
-    border-right:1px solid #1b2e6e;
-    position:fixed;
-    overflow:auto;
+/* ── SIDEBAR ── */
+.sidebar {
+    width: 230px;
+    height: 100vh;
+    background: #111c44;
+    border-right: 1px solid #1b2e6e;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    overflow-y: auto;
 }
 
-.logo{
-    padding:18px 25px;
-    font-size:20px;
-    font-weight:700;
-    color:#ffffff;
-    border-bottom:1px solid #1b2e6e;
+.sidebar .logo {
+    
+    padding: 18px 25px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid #1b2e6e;
 }
 
-.sidebar ul{
-    list-style:none;
-    padding:10px 0;
+
+
+.sidebar ul {
+    list-style: none;
+    padding: 10px 0;
 }
 
-.sidebar ul li{
-    padding:13px 22px;
-    display:flex;
-    gap:14px;
-    align-items:center;
-    cursor:pointer;
-    transition:.3s;
-    color:#8898aa;
-    font-size:14px;
+.sidebar ul li {
+    padding: 0;
+    transition: background 0.2s;
 }
 
-.sidebar ul li a{
-    text-decoration:none;
-    color:inherit;
-    display:flex;
-    gap:14px;
-    align-items:center;
-    width:100%;
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #8898aa;
+    font-size: 14px;
+    width: 100%;
+    transition: color 0.2s;
 }
 
-.sidebar ul li:hover,
-.sidebar ul li.active{
-    background:#1b2e6e;
-    color:#ffffff;
+.sidebar ul li:hover a,
+.sidebar ul li.active a {
+    background: #1b2e6e;
+    color: #ffffff;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-.main{
-    margin-left:230px;
-    width:calc(100% - 230px);
-    height:100vh;
-    display:flex;
-    flex-direction:column;
+/* ── MAIN WRAPPER ── */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
-/* =========================
-   TOPBAR
-========================= */
+/* ── TOPBAR ── */
+/* ───────── TOP NAVBAR ───────── */
 
-/* =========================
-   TOPBAR
-========================= */
-
-.topbar{
-    height:65px;
+.navbar{
+    height:60px;
     background:#111c44;
     border-bottom:1px solid #1b2e6e;
     display:flex;
+    align-items:center;
     justify-content:space-between;
-    align-items:center;
     padding:0 25px;
+    flex-shrink:0;
+    z-index:100;
 }
 
-.title{
-    font-size:18px;
+.navbar-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.hamburger{
+    font-size:20px;
+    color:#8898aa;
+    cursor:pointer;
+}
+
+.navbar-logo{
+    width:40px;
+    height:40px;
+    background:#1b2e6e;
+    border:2px solid #4299e1;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:bold;
+    color:#4299e1;
+}
+
+.navbar-title{
+    font-size:16px;
     font-weight:700;
     color:#ffffff;
-    letter-spacing:.4px;
+    letter-spacing:.5px;
 }
 
-.search-box{
-    width:380px;
-    height:42px;
+.navbar-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    padding:0 40px;
+}
+
+.nav-search{
+    width:100%;
+    max-width:420px;
     background:#0b1437;
     border:1px solid #1b2e6e;
     border-radius:10px;
+    padding:9px 15px;
     display:flex;
     align-items:center;
     gap:10px;
-    padding:0 15px;
-    color:#8898aa;
 }
 
-.search-box input{
+.nav-search i{
+    color:#4a5568;
+    font-size:14px;
+}
+
+.nav-search input{
     border:none;
     outline:none;
     background:none;
     width:100%;
-    color:#ffffff;
+    color:#e2e8f0;
     font-size:14px;
 }
 
-.search-box input::placeholder{
-    color:#8898aa;
+.nav-search input::placeholder{
+    color:#4a5568;
 }
 
-.top-right{
+.navbar-right{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:20px;
 }
 
-.icon-box{
+.nav-icon-btn{
     position:relative;
     width:38px;
     height:38px;
@@ -149,309 +189,1148 @@ body{
     border:1px solid #1b2e6e;
     border-radius:50%;
     display:flex;
-    justify-content:center;
     align-items:center;
-    color:#8898aa;
+    justify-content:center;
     cursor:pointer;
+    color:#8898aa;
+    font-size:16px;
     transition:.3s;
 }
 
-.icon-box:hover{
+.nav-icon-btn:hover{
     color:#4299e1;
     border-color:#4299e1;
 }
 
-.badge{
+.nav-icon-btn .badge{
     position:absolute;
-    top:-5px;
-    right:-5px;
-    width:17px;
-    height:17px;
+    top:-4px;
+    right:-4px;
     background:#4299e1;
-    color:#ffffff;
+    color:#fff;
+    font-size:9px;
+    font-weight:bold;
+    width:16px;
+    height:16px;
     border-radius:50%;
-    font-size:10px;
     display:flex;
+    align-items:center;
     justify-content:center;
-    align-items:center;
-    font-weight:600;
 }
 
-.profile{
+.nav-profile{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
+    cursor:pointer;
     padding:5px 10px;
-    border:1px solid #1b2e6e;
     border-radius:10px;
+    border:1px solid #1b2e6e;
 }
 
-.profile img{
-    width:40px;
-    height:40px;
+.nav-profile-avatar{
+    width:34px;
+    height:34px;
     border-radius:50%;
-    border:2px solid #4299e1;
-}
-
-.profile h4{
-    color:#ffffff;
-    font-size:14px;
-}
-
-.profile small{
-    color:#8898aa;
-    font-size:12px;
-}
-
-.profile i{
-    color:#8898aa;
-    font-size:12px;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-    flex:1;
-    overflow:auto;
-    padding:20px;
-    background:#0b1437;
-}
-
-.header{
+    background:#1b2e6e;
     display:flex;
-    justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
-}
-
-.header h1{
-    color:#ffffff;
-    font-size:28px;
-}
-
-.header p{
+    justify-content:center;
     color:#8898aa;
-    margin-top:5px;
+    font-size:16px;
 }
 
-/* =========================
-   STAT CARDS
-========================= */
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:18px;
-    margin-bottom:20px;
-}
-
-.card{
-    background:#111c44;
-    border:1px solid #1b2e6e;
-    border-radius:15px;
-    padding:22px;
-    box-shadow:0 4px 20px rgba(0,0,0,.30);
-}
-
-.card h3{
-    color:#8898aa;
-    font-size:14px;
-    font-weight:500;
-    margin-bottom:12px;
-}
-
-.card h1{
-    color:#ffffff;
-    font-size:30px;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-box{
-    background:#111c44;
-    border:1px solid #1b2e6e;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 4px 20px rgba(0,0,0,.30);
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-thead,
-tr:first-child{
-    background:#16265c;
-}
-
-th{
-    color:#ffffff;
-    padding:16px;
-    text-align:left;
-    font-size:14px;
-    font-weight:600;
-}
-
-td{
-    padding:15px 16px;
-    border-top:1px solid #1b2e6e;
-    color:#d7dfef;
-    font-size:14px;
-}
-
-tbody tr:hover{
-    background:#16265c;
-}
-
-.status{
-    display:inline-block;
-    padding:6px 15px;
-    border-radius:20px;
-    background:rgba(34,197,94,.18);
-    color:#4ade80;
+.nav-profile-info h4{
     font-size:13px;
     font-weight:600;
+    color:#ffffff;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
+.nav-profile-info small{
+    font-size:11px;
+    color:#8898aa;
+}
 
-::-webkit-scrollbar{
+.nav-profile .fa-chevron-down{
+    font-size:11px;
+    color:#8898aa;
+}
+/* ── CONTENT AREA ── */
+.content {
+    flex: 1;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow-y: auto;
+    background: #0b1437;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.page-header h1 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.page-header p {
+    font-size: 13px;
+    color: #8898aa;
+    margin-top: 3px;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.header-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    border-radius: 9px;
+    border: 1px solid #1b2e6e;
+    background: #111c44;
+    color: #e2e8f0;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.header-buttons button:hover {
+    background: #1b2e6e;
+    border-color: #4299e1;
+    color: #ffffff;
+}
+
+.header-buttons button i {
+    color: #4299e1;
+    font-size: 14px;
+}
+
+/* ── FILTERS ── */
+.filters {
+    display: flex;
+    gap: 14px;
+    flex-shrink: 0;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter label {
+    font-size: 11px;
+    color: #8898aa;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.filter select {
+    background: #111c44;
+    border: 1px solid #1b2e6e;
+    border-radius: 8px;
+    padding: 8px 14px;
+    color: #e2e8f0;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+    min-width: 160px;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238898aa' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+}
+
+.filter select:focus {
+    border-color: #4299e1;
+}
+
+/* ── MAIN LAYOUT: Employee Panel + Calendar ── */
+.attendance-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ── EMPLOYEE PANEL ── */
+.employee-panel {
+    background: #111c44;
+    border: 1px solid #1b2e6e;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.panel-title {
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+    border-bottom: 1px solid #1b2e6e;
+    flex-shrink: 0;
+}
+
+.employee-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #0b1437;
+    border-bottom: 1px solid #1b2e6e;
+    flex-shrink: 0;
+}
+
+.employee-search i {
+    color: #4a5568;
+    font-size: 12px;
+}
+
+.employee-search input {
+    background: none;
+    border: none;
+    outline: none;
+    color: #e2e8f0;
+    font-size: 13px;
+    width: 100%;
+}
+
+.employee-search input::placeholder {
+    color: #4a5568;
+}
+
+.employee-list {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.employee-list::-webkit-scrollbar {
+    width: 4px;
+}
+.employee-list::-webkit-scrollbar-track {
+    background: #0b1437;
+}
+.employee-list::-webkit-scrollbar-thumb {
+    background: #1b2e6e;
+    border-radius: 4px;
+}
+
+.employee {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #1b2e6e;
+    transition: background 0.2s;
+}
+
+.employee:last-child {
+    border-bottom: none;
+}
+
+.employee:hover {
+    background: #1b2e6e;
+}
+
+.employee.active {
+    background: #1b2e6e;
+    border-left: 3px solid #4299e1;
+    padding-left: 11px;
+}
+
+.employee img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #1b2e6e;
+    flex-shrink: 0;
+}
+
+.employee.active img {
+    border-color: #4299e1;
+}
+
+.employee h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.employee span {
+    font-size: 11px;
+    color: #8898aa;
+}
+
+/* ── CALENDAR PANEL ── */
+.calendar-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.calendar-panel::-webkit-scrollbar {
+    width: 4px;
+}
+.calendar-panel::-webkit-scrollbar-track {
+    background: #0b1437;
+}
+.calendar-panel::-webkit-scrollbar-thumb {
+    background: #1b2e6e;
+    border-radius: 4px;
+}
+
+/* ── CALENDAR BOX ── */
+/* Calendar Container */
+.calendar-box{
+    background:#111c44;
+    border:1px solid #1b2e6e;
+    border-radius:14px;
+    padding:12px 14px;
+    flex-shrink:0;
+}
+
+/* Calendar Header */
+.calendar-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.calendar-header h2{
+    font-size:14px;
+}
+
+/* Week Days */
+.weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:3px;
+    margin-bottom:4px;
+}
+
+.weekdays div{
+    font-size:10px;
+    padding:3px 0;
+}
+
+/* Calendar Grid */
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:3px;
+}
+
+/* Individual Day */
+.day{
+    aspect-ratio:1;
+    min-height:34px;
+    border-radius:6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+.day span{
+    font-size:11px;
+    font-weight:600;
+}
+
+.day small{
+    font-size:8px;
+    margin-top:2px;
+}
+
+/* Legend */
+.calendar-legend{
+    gap:12px;
+    padding-top:8px;
+}
+
+.legend-item{
+    font-size:11px;
+}
+
+.legend-dot{
     width:8px;
+    height:8px;
+}
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#1b2e6e;
-    border-radius:10px;
+.weekdays div {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8898aa;
+    padding: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-::-webkit-scrollbar-track{
-    background:#0b1437;
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1200px){
-
-    .cards{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .search{
-        width:250px;
-    }
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    border: 1px solid transparent;
+    min-height: 44px;
 }
 
-@media(max-width:768px){
-
-    body{
-        overflow:auto;
-    }
-
-    .sidebar{
-        width:200px;
-    }
-
-    .main{
-        margin-left:200px;
-        width:calc(100% - 200px);
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .topbar{
-        padding:0 15px;
-    }
+.day:hover {
+    transform: scale(1.06);
+    border-color: #4299e1;
 }
- </style>
+
+.day span {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.day small {
+    font-size: 9px;
+    font-weight: 700;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+/* Status colors */
+.day.present {
+    background: rgba(66, 153, 225, 0.12);
+    border-color: rgba(66, 153, 225, 0.25);
+}
+.day.present span { color: #4299e1; }
+.day.present small { color: #63b3ed; }
+
+.day.absent {
+    background: rgba(245, 101, 101, 0.12);
+    border-color: rgba(245, 101, 101, 0.25);
+}
+.day.absent span { color: #fc8181; }
+.day.absent small { color: #fc8181; }
+
+.day.late {
+    background: rgba(237, 137, 54, 0.12);
+    border-color: rgba(237, 137, 54, 0.25);
+}
+.day.late span { color: #f6ad55; }
+.day.late small { color: #f6ad55; }
+
+.day.leave {
+    background: rgba(154, 117, 219, 0.12);
+    border-color: rgba(154, 117, 219, 0.25);
+}
+.day.leave span { color: #b794f4; }
+.day.leave small { color: #b794f4; }
+
+.day.weekend {
+    background: rgba(255,255,255,0.02);
+    border-color: transparent;
+    cursor: default;
+}
+.day.weekend span { color: #4a5568; }
+
+.day.today {
+    border-color: #4299e1 !important;
+    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.3);
+}
+
+/* ── LEGEND ── */
+.calendar-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 10px 0 0 0;
+    border-top: 1px solid #1b2e6e;
+    margin-top: 4px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #8898aa;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.legend-dot.present { background: #4299e1; }
+.legend-dot.absent  { background: #fc8181; }
+.legend-dot.late    { background: #f6ad55; }
+.legend-dot.leave   { background: #b794f4; }
+.legend-dot.weekend { background: #2d3748; }
+
+/* ── SUMMARY CARDS ── */
+.summary {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.summary-card {
+    background: #111c44;
+    border: 1px solid #1b2e6e;
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.summary-card:hover {
+    border-color: #4299e1;
+}
+
+.summary-card h3 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #8898aa;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 6px;
+}
+
+.summary-card h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+/* Color the numbers */
+.summary-card:nth-child(1) h2 { color: #4299e1; }   /* Present  — blue  */
+.summary-card:nth-child(2) h2 { color: #fc8181; }   /* Absent   — red   */
+.summary-card:nth-child(3) h2 { color: #f6ad55; }   /* Late     — amber */
+.summary-card:nth-child(4) h2 { color: #b794f4; }   /* Leave    — purple*/
+.summary-card:nth-child(5) h2 { color: #68d391; }   /* %        — green */
+
+/* ── DETAILS TABLE ── */
+.details-table {
+    background: #111c44;
+    border: 1px solid #1b2e6e;
+    border-radius: 14px;
+    padding: 18px 20px;
+    flex-shrink: 0;
+}
+
+.details-table h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 14px;
+}
+
+.details-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details-table thead tr {
+    background: #0b1437;
+}
+
+.details-table th {
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8898aa;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    text-align: left;
+    border-bottom: 1px solid #1b2e6e;
+}
+
+.details-table th:first-child { border-radius: 8px 0 0 8px; }
+.details-table th:last-child  { border-radius: 0 8px 8px 0; }
+
+.details-table tbody tr {
+    border-bottom: 1px solid #1b2e6e;
+    transition: background 0.15s;
+}
+
+.details-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.details-table tbody tr:hover {
+    background: rgba(27, 46, 110, 0.4);
+}
+
+.details-table td {
+    padding: 11px 14px;
+    font-size: 13px;
+    color: #cbd5e0;
+}
+
+/* Status badges in table */
+.details-table td:last-child {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Emulate badge via attribute if you want, or just color by content */
+.details-table tbody tr td:last-child {
+    /* fallback neutral */
+    color: #8898aa;
+}
+
+/* Status cell colors — add a class to <td> in JS if needed, or use these utility classes */
+.status-present { color: #4299e1 !important; }
+.status-absent  { color: #fc8181 !important; }
+.status-late    { color: #f6ad55 !important; }
+.status-leave   { color: #b794f4 !important; }
+
+/* Scrollbar for content */
+.content::-webkit-scrollbar { width: 5px; }
+.content::-webkit-scrollbar-track { background: #0b1437; }
+.content::-webkit-scrollbar-thumb { background: #1b2e6e; border-radius: 4px; }
+
+</style>
 </head>
+
 <body>
+
+<!-- =========================
+SIDEBAR
+========================= -->
+
 <div class="sidebar">
- <div class="logo">EMS ADMIN</div>
+
+<div class="logo">
+EMS ADMIN
+</div>
+
 <ul>
- <li ><a href="Dashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
- <li><a href="Employee.html"><i class="fa-solid fa-users"></i> Employees</a></li>
- <li><a href="department.html"><i class="fa-solid fa-building"></i> Departments</a></li>
- <li class="active"><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
- <li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i> Leave Management</a></li>
- <li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i> Performance</a></li>
- <li><a href="project.html"><i class="fa-solid fa-folder"></i> Projects</a></li>
- <li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i> Internship</a></li>
- <li><a href="document.html"><i class="fa-solid fa-file"></i> Documents</a></li>
- <li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i> Payroll</a></li>
- <li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i> Mentorship</a></li>
- <li><a href="reports.html"><i class="fa-solid fa-chart-column"></i> Reports</a></li>
- <li><a href="notification.html"><i class="fa-solid fa-bell"></i> Notifications</a></li>
- <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
- </ul>
- </div>
+
+<li><a href="Dashboard.html"><i class="fa-solid fa-house"></i>Dashboard</a></li>
+
+<li><a href="Employee.html"><i class="fa-solid fa-users"></i>Employees</a></li>
+
+<li><a href="department.html"><i class="fa-solid fa-building"></i>Departments</a></li>
+
+<li class="active"><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i>Attendance</a></li>
+
+<li><a href="leave management.html"><i class="fa-solid fa-plane-departure"></i>Leave Management</a></li>
+
+<li><a href="perfomance.html"><i class="fa-solid fa-chart-line"></i>Performance</a></li>
+
+<li><a href="project.html"><i class="fa-solid fa-folder"></i>Projects</a></li>
+
+<li><a href="internship.html"><i class="fa-solid fa-user-graduate"></i>Internship</a></li>
+
+<li><a href="document.html"><i class="fa-solid fa-file"></i>Documents</a></li>
+
+<li><a href="payroll.html"><i class="fa-solid fa-money-bill"></i>Payroll</a></li>
+
+<li><a href="mentorship.html"><i class="fa-solid fa-user-group"></i>Mentorship</a></li>
+
+<li><a href="reports.html"><i class="fa-solid fa-chart-column"></i>Reports</a></li>
+
+<li><a href="notification.html"><i class="fa-solid fa-bell"></i>Notifications</a></li>
+
+<li><a href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a></li>
+
+</ul>
+
+</div>
+
+<!-- =========================
+MAIN
+========================= -->
+
 <div class="main">
-<div class="topbar">
 
-    <div class="title">
-        EMPLOYEE MANAGEMENT SYSTEM
+<!-- TOPBAR -->
+
+<!-- TOP NAVBAR -->
+<div class="navbar">
+    <div class="navbar-left">
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <div class="navbar-logo">
+            LOGO
+        </div>
+
+        <span class="navbar-title">
+            EMPLOYEE MANAGEMENT SYSTEM
+        </span>
     </div>
 
-    <div class="search-box">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Search anything...">
+    <div class="navbar-center">
+        <div class="nav-search">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search anything...">
+        </div>
     </div>
 
-    <div class="top-right">
+    <div class="navbar-right">
 
-        <div class="icon-box">
+        <div class="nav-icon-btn">
             <i class="fa-regular fa-bell"></i>
             <span class="badge">3</span>
         </div>
 
-        <div class="icon-box">
+        <div class="nav-icon-btn">
             <i class="fa-regular fa-envelope"></i>
             <span class="badge">5</span>
         </div>
 
-        <div class="profile">
+        <div class="nav-profile">
 
-            <img src="https://i.pravatar.cc/50?img=5" alt="Profile">
-
-            <div>
-                <h4>John Doe</h4>
-                <small>Manager</small>
+            <div class="nav-profile-avatar">
+                <i class="fa-regular fa-user"></i>
             </div>
 
-            <i class="fa-solid fa-angle-down"></i>
+            <div class="nav-profile-info">
+                <h4>John Doe</h4>
+                <small>Admin</small>
+            </div>
+
+            <i class="fa-solid fa-chevron-down"></i>
 
         </div>
 
     </div>
+</div>
+<!-- CONTENT -->
+
+<div class="content">
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+
+<div>
+
+<h1>Attendance Management</h1>
+
+<p>
+Monitor employee attendance, late check-ins and leave records.
+</p>
 
 </div>
-<div class="content">
-<div class="header"><div><h1>Attendance Management</h1><p>View and monitor attendance marked by managers</p></div></div>
-<div class="cards">
-<div class="card"><h3>Total Employees</h3><h1>256</h1></div>
-<div class="card"><h3>Present</h3><h1>198</h1></div>
-<div class="card"><h3>Absent</h3><h1>42</h1></div>
-<div class="card"><h3>On Leave</h3><h1>16</h1></div>
-<div class="card"><h3>Late</h3><h1>22</h1></div>
+
+<div class="header-buttons">
+
+<button>
+
+<i class="fa-solid fa-file-excel"></i>
+
+Export Excel
+
+</button>
+
+<button>
+
+<i class="fa-solid fa-file-pdf"></i>
+
+Export PDF
+
+</button>
+
 </div>
-<div class="table-box">
+
+</div>
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+<div class="filter">
+
+<label>Department</label>
+
+<select>
+
+<option>All Departments</option>
+
+<option>IT</option>
+
+<option>HR</option>
+
+<option>Finance</option>
+
+<option>Marketing</option>
+
+</select>
+
+</div>
+
+<div class="filter">
+
+<label>Month</label>
+
+<select>
+
+<option>June 2026</option>
+
+<option>July 2026</option>
+
+<option>August 2026</option>
+
+</select>
+
+</div>
+
+</div>
+
+<!-- MAIN LAYOUT -->
+
+<div class="attendance-layout">
+
+<!-- LEFT EMPLOYEE PANEL -->
+
+<div class="employee-panel">
+
+<div class="panel-title">
+
+Employees
+
+</div>
+
+<div class="employee-search">
+
+<i class="fa-solid fa-search"></i>
+
+<input type="text" placeholder="Search employee">
+
+</div>
+
+<div class="employee-list">
+
+<div class="employee active">
+
+<img src="https://i.pravatar.cc/100?img=5">
+
+<div>
+
+<h4>John Doe</h4>
+
+<span>IT Department</span>
+
+</div>
+
+</div>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/100?img=6">
+
+<div>
+
+<h4>Sarah Johnson</h4>
+
+<span>HR Department</span>
+
+</div>
+
+</div>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/100?img=7">
+
+<div>
+
+<h4>Robert Smith</h4>
+
+<span>Finance</span>
+
+</div>
+
+</div>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/100?img=8">
+
+<div>
+
+<h4>Emily Davis</h4>
+
+<span>Marketing</span>
+
+</div>
+
+</div>
+
+<div class="employee">
+
+<img src="https://i.pravatar.cc/100?img=9">
+
+<div>
+
+<h4>Michael Brown</h4>
+
+<span>Sales</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT CONTENT -->
+
+<div class="calendar-panel">
+
+<!-- MONTH -->
+
+<div class="calendar-header">
+
+<h2>June 2026</h2>
+
+</div>
+
+<!-- WEEK -->
+
+<div class="weekdays">
+
+<div>Mon</div>
+
+<div>Tue</div>
+
+<div>Wed</div>
+
+<div>Thu</div>
+
+<div>Fri</div>
+
+<div>Sat</div>
+
+<div>Sun</div>
+
+</div>
+
+<!-- CALENDAR -->
+
+<div class="calendar-grid" id="calendarGrid">
+
+<div class="day present"><span>1</span><small>P</small></div>
+
+<div class="day present"><span>2</span><small>P</small></div>
+
+<div class="day absent"><span>3</span><small>A</small></div>
+
+<div class="day present"><span>4</span><small>P</small></div>
+
+<div class="day late"><span>5</span><small>L</small></div>
+
+<div class="day weekend"><span>6</span></div>
+
+<div class="day weekend"><span>7</span></div>
+
+<div class="day present"><span>8</span><small>P</small></div>
+
+<div class="day present"><span>9</span><small>P</small></div>
+
+<div class="day present"><span>10</span><small>P</small></div>
+
+<div class="day present"><span>11</span><small>P</small></div>
+
+<div class="day leave"><span>12</span><small>LV</small></div>
+
+<div class="day weekend"><span>13</span></div>
+
+<div class="day weekend"><span>14</span></div>
+
+<div class="day present"><span>15</span><small>P</small></div>
+
+<div class="day present"><span>16</span><small>P</small></div>
+
+<div class="day present"><span>17</span><small>P</small></div>
+
+<div class="day late"><span>18</span><small>L</small></div>
+
+<div class="day present"><span>19</span><small>P</small></div>
+
+<div class="day weekend"><span>20</span></div>
+
+<div class="day weekend"><span>21</span></div>
+
+<div class="day present"><span>22</span><small>P</small></div>
+
+<div class="day absent"><span>23</span><small>A</small></div>
+
+<div class="day present"><span>24</span><small>P</small></div>
+
+<div class="day present"><span>25</span><small>P</small></div>
+
+<div class="day present"><span>26</span><small>P</small></div>
+
+<div class="day weekend"><span>27</span></div>
+
+<div class="day weekend"><span>28</span></div>
+
+<div class="day present"><span>29</span><small>P</small></div>
+
+<div class="day present"><span>30</span><small>P</small></div>
+
+</div>
+
+<!-- SUMMARY -->
+
+<div class="summary">
+
+<div class="summary-card">
+<h3>Present</h3>
+<h2>21</h2>
+</div>
+
+<div class="summary-card">
+<h3>Absent</h3>
+<h2>2</h2>
+</div>
+
+<div class="summary-card">
+<h3>Late</h3>
+<h2>3</h2>
+</div>
+
+<div class="summary-card">
+<h3>Leave</h3>
+<h2>2</h2>
+</div>
+
+<div class="summary-card">
+<h3>Attendance %</h3>
+<h2>91%</h2>
+</div>
+
+</div>
+
+<!-- DETAILS TABLE -->
+
+<div class="details-table">
+
+<h3>Attendance Details</h3>
+
 <table>
-<tr><th>ID</th><th>Name</th><th>Department</th><th>Status</th></tr>
-<tr><td>EMP001</td><td>John Doe</td><td>IT</td><td><span class="status">Present</span></td></tr>
-<tr><td>EMP002</td><td>Sarah Johnson</td><td>HR</td><td><span class="status">Present</span></td></tr>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+
+<th>Check In</th>
+
+<th>Check Out</th>
+
+<th>Working Hours</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="attendanceTable">
+
+<tr>
+
+<td>01 Jun</td>
+
+<td>09:02 AM</td>
+
+<td>06:05 PM</td>
+
+<td>9h 03m</td>
+
+<td>Present</td>
+
+</tr>
+
+<tr>
+
+<td>02 Jun</td>
+
+<td>09:18 AM</td>
+
+<td>06:07 PM</td>
+
+<td>8h 49m</td>
+
+<td>Late</td>
+
+</tr>
+
+<tr>
+
+<td>03 Jun</td>
+
+<td>--</td>
+
+<td>--</td>
+
+<td>0h</td>
+
+<td>Absent</td>
+
+</tr>
+
+</tbody>
+
 </table>
+
 </div>
+
 </div>
+
 </div>
+
+</div>
+
+</div>
+
+<script src="attendance.js"></script>
+
 </body>
 </html>

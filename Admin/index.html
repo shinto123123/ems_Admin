@@ -346,6 +346,7 @@ body {
     color: #ffffff;
 }
 
+/* ── BOTTOM ROW ── */
 .bottom {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -366,30 +367,141 @@ body {
     font-size: 15px;
 }
 
-.bar {
-    height: 110px;
+.chart h3 span {
+    color: #8898aa;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.chart-inner {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+}
+
+.chart-graph {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+}
+
+.chart-y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 22px;
+    min-width: 36px;
+}
+
+.chart-y-axis span {
+    font-size: 11px;
+    color: #8898aa;
+}
+
+.chart-bars-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chart-bars {
+    flex: 1;
     display: flex;
     align-items: flex-end;
-    gap: 18px;
+    gap: 10px;
+    border-left: 1px solid #1b2e6e;
+    border-bottom: 1px solid #1b2e6e;
+    padding: 8px 8px 0 8px;
+    height: 120px;
 }
 
-.bar div {
-    width: 40px;
+.bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.bar-col .bar-fill {
+    width: 100%;
+    max-width: 32px;
+    border-radius: 4px 4px 0 0;
     background: #4299e1;
-    border-radius: 6px 6px 0 0;
 }
 
-.bar div:nth-child(even) {
+.bar-col:nth-child(even) .bar-fill {
     background: #00b5d8;
 }
 
+.chart-x-labels {
+    display: flex;
+    gap: 10px;
+    padding: 6px 8px 0 8px;
+}
+
+.chart-x-labels span {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    color: #8898aa;
+}
+
+.chart-stats {
+    background: #0b1437;
+    border: 1px solid #1b2e6e;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 140px;
+}
+
+.chart-stats .stat-label {
+    font-size: 12px;
+    color: #8898aa;
+    text-align: center;
+}
+
+.chart-stats .stat-big {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+}
+
+.chart-stats-row {
+    display: flex;
+    gap: 18px;
+}
+
+.chart-stats-row .stat-item {
+    text-align: center;
+}
+
+.chart-stats-row .stat-item p {
+    font-size: 11px;
+    color: #8898aa;
+}
+
+.chart-stats-row .stat-item h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* ── LEAVE ── */
 .leave {
     background: #111c44;
     padding: 18px;
     border-radius: 15px;
     border: 1px solid #1b2e6e;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    text-align: center;
 }
 
 .leave h3 {
@@ -398,17 +510,67 @@ body {
     font-size: 15px;
 }
 
-.circle {
+.leave-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.donut-wrap {
+    flex-shrink: 0;
+}
+
+.donut-wrap svg {
     width: 110px;
     height: 110px;
-    border-radius: 50%;
-    margin: auto;
-    background: conic-gradient(
-        #4299e1 0 50%,
-        #00b5d8 50% 80%,
-        #1b2e6e 80% 100%
-    );
 }
+
+.leave-legend {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    color: #8898aa;
+}
+
+.leave-legend .leg-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.leg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.leg-label {
+    flex: 1;
+    color: #8898aa;
+    font-size: 13px;
+}
+
+.leg-val {
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.leave-total {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #1b2e6e;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.leave-total span:first-child { color: #8898aa; }
+.leave-total span:last-child { color: #e2e8f0; font-weight: 600; }
 
 .leave p {
     margin-top: 8px;
@@ -553,27 +715,98 @@ body {
             </div>
 
             <!-- Middle: Attendance + Leave -->
-            <div class="bottom">
-                <div class="chart">
-                    <h3>Attendance Overview</h3>
-                    <div class="bar">
-                        <div style="height:80%"></div>
-                        <div style="height:85%"></div>
-                        <div style="height:75%"></div>
-                        <div style="height:90%"></div>
-                        <div style="height:88%"></div>
-                        <div style="height:70%"></div>
+            <!-- Middle: Attendance + Leave -->
+<div class="bottom">
+    <div class="chart">
+        <h3>Attendance Overview <span>(This Week)</span></h3>
+        <div class="chart-inner">
+            <div class="chart-graph">
+                <div class="chart-y-axis">
+                    <span>100%</span>
+                    <span>75%</span>
+                    <span>50%</span>
+                    <span>25%</span>
+                    <span>0%</span>
+                </div>
+                <div class="chart-bars-wrap">
+                    <div class="chart-bars">
+                        <div class="bar-col"><div class="bar-fill" style="height:80%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:85%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:75%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:90%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:88%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:65%"></div></div>
+                        <div class="bar-col"><div class="bar-fill" style="height:20%"></div></div>
+                    </div>
+                    <div class="chart-x-labels">
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
                     </div>
                 </div>
-                <div class="leave">
-                    <h3>Leave Overview</h3>
-                    <div class="circle"></div>
-                    <br>
-                    <p>Approved : 25</p>
-                    <p>Pending : 15</p>
-                    <p>Rejected : 10</p>
+            </div>
+            <div class="chart-stats">
+                <p class="stat-label">Average Attendance</p>
+                <div class="stat-big">92%</div>
+                <div class="chart-stats-row">
+                    <div class="stat-item">
+                        <p>Present</p>
+                        <h4>236</h4>
+                    </div>
+                    <div class="stat-item">
+                        <p>Absent</p>
+                        <h4>20</h4>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="leave">
+        <h3>Leave Overview</h3>
+        <div class="leave-inner">
+            <div class="donut-wrap">
+                <svg viewBox="0 0 36 36">
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#1b2e6e" stroke-width="3.5"/>
+                    <!-- Approved 50% -->
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#4299e1" stroke-width="3.5"
+                        stroke-dasharray="50 50" stroke-dashoffset="25" stroke-linecap="round"/>
+                    <!-- Pending 30% -->
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#00b5d8" stroke-width="3.5"
+                        stroke-dasharray="30 70" stroke-dashoffset="-25" stroke-linecap="round"/>
+                    <!-- Rejected 20% -->
+                    <circle cx="18" cy="18" r="15.9" fill="none" stroke="#2d4a8a" stroke-width="3.5"
+                        stroke-dasharray="20 80" stroke-dashoffset="-55" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="leave-legend">
+                <div class="leg-row">
+                    <div class="leg-dot" style="background:#4299e1"></div>
+                    <span class="leg-label">Approved</span>
+                    <span class="leg-val">25 (50%)</span>
+                </div>
+                <div class="leg-row">
+                    <div class="leg-dot" style="background:#00b5d8"></div>
+                    <span class="leg-label">Pending</span>
+                    <span class="leg-val">15 (30%)</span>
+                </div>
+                <div class="leg-row">
+                    <div class="leg-dot" style="background:#2d4a8a"></div>
+                    <span class="leg-label">Rejected</span>
+                    <span class="leg-val">10 (20%)</span>
+                </div>
+                <div class="leave-total">
+                    <span>Total Leaves</span>
+                    <span>50</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
             <!-- Bottom: Activities, Events, Notifications -->
             <div class="sections">

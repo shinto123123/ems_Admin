@@ -93,123 +93,170 @@ body{
    TOPBAR
 ========================= */
 
-.topbar{
-    height:65px;
+/* ───────── TOP NAVBAR ───────── */
+
+.navbar{
+    height:60px;
     background:#111c44;
     border-bottom:1px solid #1b2e6e;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
     padding:0 25px;
     flex-shrink:0;
+    z-index:100;
 }
 
-.title{
-    font-size:18px;
+.navbar-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.hamburger{
+    font-size:20px;
+    color:#8898aa;
+    cursor:pointer;
+}
+
+.navbar-logo{
+    width:40px;
+    height:40px;
+    background:#1b2e6e;
+    border:2px solid #4299e1;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:bold;
+    color:#4299e1;
+}
+
+.navbar-title{
+    font-size:16px;
     font-weight:700;
     color:#ffffff;
     letter-spacing:.5px;
 }
 
-.search-box{
-    width:360px;
-    height:42px;
+.navbar-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    padding:0 40px;
+}
+
+.nav-search{
+    width:100%;
+    max-width:420px;
     background:#0b1437;
     border:1px solid #1b2e6e;
     border-radius:10px;
+    padding:9px 15px;
     display:flex;
     align-items:center;
     gap:10px;
-    padding:0 15px;
-    color:#8898aa;
 }
 
-.search-box input{
-    border:none;
-    outline:none;
-    width:100%;
-    background:none;
-    color:#ffffff;
+.nav-search i{
+    color:#4a5568;
     font-size:14px;
 }
 
-.search-box input::placeholder{
-    color:#8898aa;
+.nav-search input{
+    border:none;
+    outline:none;
+    background:none;
+    width:100%;
+    color:#e2e8f0;
+    font-size:14px;
 }
 
-.top-right{
+.nav-search input::placeholder{
+    color:#4a5568;
+}
+
+.navbar-right{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:20px;
 }
 
-.icon-box{
+.nav-icon-btn{
     position:relative;
     width:38px;
     height:38px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     background:#0b1437;
     border:1px solid #1b2e6e;
     border-radius:50%;
-    color:#8898aa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     cursor:pointer;
+    color:#8898aa;
+    font-size:16px;
     transition:.3s;
 }
 
-.icon-box:hover{
+.nav-icon-btn:hover{
     color:#4299e1;
     border-color:#4299e1;
 }
 
-.badge{
+.nav-icon-btn .badge{
     position:absolute;
-    top:-5px;
-    right:-5px;
-    width:17px;
-    height:17px;
-    border-radius:50%;
+    top:-4px;
+    right:-4px;
     background:#4299e1;
-    color:#ffffff;
-    font-size:10px;
-    font-weight:600;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.profile{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:5px 10px;
-    border:1px solid #1b2e6e;
-    border-radius:10px;
-}
-
-.profile img{
-    width:40px;
-    height:40px;
+    color:#fff;
+    font-size:9px;
+    font-weight:bold;
+    width:16px;
+    height:16px;
     border-radius:50%;
-    border:2px solid #4299e1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.profile h4{
+.nav-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    padding:5px 10px;
+    border-radius:10px;
+    border:1px solid #1b2e6e;
+}
+
+.nav-profile-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#1b2e6e;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#8898aa;
+    font-size:16px;
+}
+
+.nav-profile-info h4{
+    font-size:13px;
+    font-weight:600;
     color:#ffffff;
-    font-size:14px;
 }
 
-.profile small{
+.nav-profile-info small{
+    font-size:11px;
     color:#8898aa;
-    font-size:12px;
 }
 
-.profile i{
+.nav-profile .fa-chevron-down{
+    font-size:11px;
     color:#8898aa;
-    font-size:12px;
 }
-
 /* =========================
    CONTENT
 ========================= */
@@ -836,54 +883,58 @@ EMS ADMIN
 
 <!-- Topbar -->
 
-<div class="topbar">
+<!-- TOP NAVBAR -->
+<div class="navbar">
+    <div class="navbar-left">
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
 
-<div class="title">
+        <div class="navbar-logo">
+            LOGO
+        </div>
 
-EMPLOYEE MANAGEMENT SYSTEM
+        <span class="navbar-title">
+            EMPLOYEE MANAGEMENT SYSTEM
+        </span>
+    </div>
 
+    <div class="navbar-center">
+        <div class="nav-search">
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="Search anything...">
+        </div>
+    </div>
+
+    <div class="navbar-right">
+
+        <div class="nav-icon-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="badge">3</span>
+        </div>
+
+        <div class="nav-icon-btn">
+            <i class="fa-regular fa-envelope"></i>
+            <span class="badge">5</span>
+        </div>
+
+        <div class="nav-profile">
+
+            <div class="nav-profile-avatar">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div class="nav-profile-info">
+                <h4>John Doe</h4>
+                <small>Admin</small>
+            </div>
+
+            <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+    </div>
 </div>
-
-<div class="search-box">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<input type="text" placeholder="Search anything...">
-
-</div>
-
-<div class="top-right">
-
-<div class="icon-box">
-<i class="fa-regular fa-bell"></i>
-<span class="badge">3</span>
-</div>
-
-<div class="icon-box">
-<i class="fa-regular fa-envelope"></i>
-<span class="badge">5</span>
-</div>
-
-<div class="profile">
-
-<img src="https://0?img=5">
-
-<div>
-
-<h4>Admin User</h4>
-
-<small>Administrator</small>
-
-</div>
-
-<i class="fa-solid fa-angle-down"></i>
-
-</div>
-
-</div>
-
-</div>
-
 
 <!-- Content -->
 
